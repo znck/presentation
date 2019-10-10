@@ -1,0 +1,97 @@
+export interface Message<T extends string = string, P = unknown> {
+  type: T;
+  payload: P;
+}
+
+export interface User {
+  /**
+   * Unique device ID.
+   */
+  id: string;
+
+  /**
+   * User's email address.
+   */
+  email: string;
+
+  /**
+   * Display name.
+   */
+  name: string;
+
+  /**
+   * User role.
+   */
+  role: 'admin' | 'audience' | 'remote' | 'slideshow';
+}
+
+const enum Action {
+  REQUEST = '@vs/request',
+  APPROVE = '@vs/approve',
+  IDENTITY = '@vs/identity',
+  VUEX_ACTION = '@vs/vuex/action',
+}
+
+export interface RequestMessage extends Message {
+  type: Action.REQUEST;
+  payload: string;
+}
+
+export interface ApproveMessage extends Message {
+  type: Action.APPROVE;
+  payload: string;
+}
+
+export interface IdentityMessage extends Message {
+  type: Action.IDENTITY;
+  payload: User;
+}
+
+export interface VuexActionMessage extends Message {
+  type: Action.VUEX_ACTION;
+  payload: Message;
+}
+
+function createMessage<T extends string, P>(action: T, payload: P): Message<T, P> {
+  return { type: action, payload: payload };
+}
+
+export const create = {
+  request(resource: string): RequestMessage {
+    return createMessage(Action.REQUEST, resource);
+  },
+
+  approve(resource: string): ApproveMessage {
+    return createMessage(Action.APPROVE, resource);
+  },
+
+  identity(user: User): IdentityMessage {
+    return createMessage(Action.IDENTITY, user);
+  },
+
+  vuexAction(payload: Message): VuexActionMessage {
+    return createMessage(Action.VUEX_ACTION, payload);
+  },
+};
+
+function isMessage(message: unknown, type: Action) {
+  return message && typeof message === 'object' && (message as any).type === type;
+}
+
+export const is = {
+  request(message: unknown): message is RequestMessage {
+    return isMessage(message, Action.REQUEST);
+  },
+
+  approve(message: unknown): message is RequestMessage {
+    return isMessage(message, Action.APPROVE);
+  },
+
+  identity(message: unknown): message is IdentityMessage {
+    return isMessage(message, Action.IDENTITY);
+  },
+
+  vuexAction(message: unknown): message is VuexActionMessage {
+    return isMessage(message, Action.VUEX_ACTION);
+  },
+};
