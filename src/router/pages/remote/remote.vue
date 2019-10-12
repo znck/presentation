@@ -94,13 +94,14 @@ export default {
 
 <template>
   <div :class="$.remote">
-    <WaitScreen v-if="!isConnected" :remoteId="deviceId" />
-    <RemoteSyncControl v-if="isConnected" :target="serverId" />
-
-    <div :class="$.container" v-if="isConnected">
-      <Presentation />
-      <Controls />
-    </div>
+    <template v-if="isConnected">
+      <RemoteSyncControl :target="serverId" />
+      <div :class="$.container">
+        <Presentation />
+        <Controls />
+      </div>
+    </template>
+    <WaitScreen v-else :remoteId="deviceId" />
   </div>
 </template>
 
