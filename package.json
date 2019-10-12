@@ -4,11 +4,13 @@
   "description": "",
   "author": "Rahul Kadyan <rahulkdn@gmail.com> (https://znck.dev/)",
   "scripts": {
-    "dev": "vue-cli-service serve --https src/index.ts",
-    "serve": "vue-cli-service serve --https example/main.js",
+    "test": "npm run test:unit",
+    "serve": "vue-cli-service serve example/main.js",
     "build": "vue-cli-service build example/main.js",
+    "deploy": "surge --domain accidental.surge.sh dist",
+    "dev": "vue-cli-service serve --https src/index.ts",
     "predeploy": "cp dist/index.html dist/200.html",
-    "deploy": "surge --domain accidental.surge.sh dist"
+    "test:unit": "vue-cli-service test:unit"
   },
   "main": "index.js",
   "dependencies": {
@@ -23,9 +25,16 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.5",
+    "@types/jest": "^24.0.18",
     "@types/uuid": "^3.4.5",
     "@vue/cli-plugin-typescript": "^3.11.0",
+    "@vue/cli-plugin-unit-jest": "^3.12.0",
     "@vue/cli-service": "^3.11.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "jest": "^24.9.0",
+    "rollup": "^1.23.1",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"
   },

@@ -1,0 +1,20 @@
+{
+  "name": "@znck/slides-loader",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "keywords": [],
+  "author": "Rahul Kadyan <rahulkdn@gmail.com> (https://znck.dev/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/markdown-it": "^0.0.9",
+    "@types/webpack": "^4.39.3",
+    "de-indent": "^1.0.2",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.1"
+  },
+  "dependencies": {
+    "front-matter": "^3.0.2",
+    "markdown-it": "^10.0.0"
+  }
+}

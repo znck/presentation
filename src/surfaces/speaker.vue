@@ -31,7 +31,7 @@ export default {
       </FitAspectRatio>
     </div>
     <div :class="$.notes">
-      <slot :name="'notes.' + currentSlide" />
+      <slot :name="'notes-' + currentSlide" />
     </div>
 
     <KeyboardNavigation />
