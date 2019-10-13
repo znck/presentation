@@ -34,7 +34,11 @@ const enum Action {
 
 export interface RequestMessage extends Message {
   type: Action.REQUEST;
-  payload: string;
+  payload: {
+    resource: string;
+    secret?: string;
+    [key: string]: unknown;
+  };
 }
 
 export interface ApproveMessage extends Message {
@@ -57,8 +61,8 @@ function createMessage<T extends string, P>(action: T, payload: P): Message<T, P
 }
 
 export const create = {
-  request(resource: string): RequestMessage {
-    return createMessage(Action.REQUEST, resource);
+  request(resource: string, payload?: Record<string, unknown>): RequestMessage {
+    return createMessage(Action.REQUEST, { ...payload, resource });
   },
 
   approve(resource: string): ApproveMessage {

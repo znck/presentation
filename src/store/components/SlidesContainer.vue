@@ -1,5 +1,5 @@
 <script>
-import { surface, control } from "@/store/helpers";
+import { surface, control } from '@/store/helpers';
 import { getSurface } from '@/surfaces';
 
 export default {
@@ -8,6 +8,16 @@ export default {
       type: Number,
       default: 16 / 9,
     },
+    timer: {
+      type: Number,
+      default: 30,
+    },
+  },
+
+  provide() {
+    return {
+      config: this.$props,
+    };
   },
 
   computed: {

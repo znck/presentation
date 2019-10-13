@@ -1,35 +1,39 @@
 <script>
-import SurfaceSwitcher from "@/store/components/SurfaceSwitcher";
-import ReceiveControlCommands from "@/store/components/ReceiveControlCommands.vue";
-import { root } from "@/store/helpers";
-import { createChannel } from "@/peer";
+import SurfaceSwitcher from '@/store/components/SurfaceSwitcher';
+import SyncVuex from '@/store/components/peer-sync-vuex.vue';
+import { root } from '@/store/helpers';
+import { createChannel, create } from '@/peer';
 
 export default {
   props: {
     id: String,
+    secret: String,
   },
   data() {
     return { isRemoteControlled: false };
   },
-  components: { SurfaceSwitcher, ReceiveControlCommands },
+  components: { SurfaceSwitcher, SyncVuex },
 
   methods: root.methods,
   async created() {
     if (this.id) {
       const channel = createChannel(false);
 
-      channel.setName("Slideshow Target")
+      channel.setName('Slideshow Target');
+      channel.setRole('slideshow');
+
+      if (this.secret) channel.secret = this.secret;
 
       channel.onPeerLeave(async user => {
         if (this.id === user.id) {
           await channel.connect(this.id);
-          await channel.sendMessage(this.id, "@vs/request-second-screen");
+          await channel.sendMessage(this.id, create.request('slideshow', { secret: this.secret }));
         }
-      })
+      });
 
       await this.setup(channel);
       await channel.connect(this.id);
-      await channel.sendMessage(this.id, "@vs/request-second-screen");
+      await channel.sendMessage(this.id, create.request('slideshow', { secret: this.secret }));
       this.isRemoteControlled = true;
     }
   },
@@ -40,7 +44,7 @@ export default {
   <div :class="$.slideshow">
     <Presentation />
     <SurfaceSwitcher />
-    <ReceiveControlCommands v-if="isRemoteControlled" :from="id" />
+    <SyncVuex v-if="isRemoteControlled" :from="id" />
   </div>
 </template>
 

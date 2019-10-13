@@ -1,5 +1,5 @@
 <script>
-import { getZoomToFitAspectRatio } from "@/utils";
+import { getZoomToFitAspectRatio } from '@/utils';
 
 export default {
   props: {
@@ -22,11 +22,11 @@ export default {
   },
 
   mounted() {
-    window.addEventListener("resize", this.resize, { passive: true });
+    window.addEventListener('resize', this.resize, { passive: true });
   },
 
   destroyed() {
-    window.removeEventListener("resize", this.resize);
+    window.removeEventListener('resize', this.resize);
   },
 
   methods: {
@@ -47,9 +47,10 @@ export default {
 
 <style module="$">
 .container {
+  --inner-fit-width: var(--fit-width, 100vw);
   width: 100%;
   height: 100%;
-  max-height: calc(100vw * var(--aspect) * var(--zoom));
+  max-height: calc(var(--inner-fit-width) * var(--aspect) * var(--zoom));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,14 +58,14 @@ export default {
 }
 
 .content {
-  width: 100vw;
-  height: calc(100vw * var(--aspect));
+  width: var(--inner-fit-width);
+  height: calc(var(--inner-fit-width) * var(--aspect));
   background-color: black;
   margin-left: auto;
   margin-right: auto;
   transform: scale(var(--zoom));
-  transform-origin: center;
-  flex-basis: 100vw;
+  transform-origin: var(--fix-origin, center);
+  flex-basis: var(--inner-fit-width);
   flex-shrink: 0;
   flex-grow: 0;
 }

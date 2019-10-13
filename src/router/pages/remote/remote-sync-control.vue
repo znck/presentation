@@ -4,6 +4,7 @@
 import { root } from '@/store/helpers';
 import { is, create } from '@/peer';
 import store from '@/store';
+import SyncVuex from '@/store/components/peer-sync-vuex.vue';
 
 export default {
   props: {
@@ -22,7 +23,7 @@ export default {
     const ch = await this.channel();
     let isSyncing = false;
 
-    // Sync remote store with local store.
+    // Listen to vuex actions on admin device.
     this.$on(
       'hook:beforeDestroy',
       ch.onMessage(async (user, message) => {
@@ -39,7 +40,7 @@ export default {
       })
     );
 
-    // Sync local store with remote store.
+    // Send vuex actions to admin device.
     this.$on(
       'hook:beforeDestroy',
       store.subscribeAction(action => {
@@ -50,8 +51,10 @@ export default {
     );
   },
 
-  render(h) {
-    return h(null);
-  },
+  components: { SyncVuex },
 };
 </script>
+
+<template>
+  <SyncVuex :from="target" />
+</template>

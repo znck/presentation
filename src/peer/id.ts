@@ -1,26 +1,33 @@
-import uuid from "uuid/v4";
+import uuid from 'uuid/v4';
 
-const DEVICE_FIXED_ID_KEY = "deviceId";
+const DEVICE_FIXED_ID_KEY = 'deviceId';
 
-function getOrCreateID(key: string)  {
-  let id = localStorage.getItem(key)
+function getOrCreateID(key: string) {
+  let id = localStorage.getItem(key);
 
   if (!id) {
-    id = uuid()
+    id = uuid();
 
-    localStorage.setItem(key, id)
+    localStorage.setItem(key, id);
   }
 
-  return id
+  return id;
 }
 
-const device = uuid()
+const device = uuid();
+let secret = uuid();
 
 export const ID = {
   get device() {
-    return device
+    return device;
   },
   get deviceFixed() {
-    return getOrCreateID(DEVICE_FIXED_ID_KEY)
+    return getOrCreateID(DEVICE_FIXED_ID_KEY);
   },
-}
+  get secret() {
+    return secret;
+  },
+  set secret(value: string) {
+    secret = value;
+  },
+};

@@ -1,4 +1,5 @@
 const surfaces = {
+  admin: () => import("./admin.vue"),
   slideshow: () => import("./slideshow.vue"),
   speaker: () => import("./speaker.vue"),
   overview: () => import("./overview.vue"),

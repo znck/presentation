@@ -35,6 +35,7 @@ function callCallbacks(cbs: Array<(...args: any[]) => any>, ...args: any[]) {
 export function createChannel(asController: boolean | User['role'] = false) {
   const role = asController === true ? 'admin' : asController || 'audience';
   const id = role === 'admin' ? ID.deviceFixed : ID.device;
+
   const user: User = {
     id,
     name: 'Anonymous',
@@ -177,6 +178,14 @@ export function createChannel(asController: boolean | User['role'] = false) {
   return {
     get id() {
       return user.id;
+    },
+
+    get secret() {
+      return ID.secret;
+    },
+
+    set secret(value: string) {
+      ID.secret = value;
     },
 
     get me() {

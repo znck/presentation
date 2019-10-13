@@ -58,6 +58,17 @@ export const remotes = {
   methods: mapActions('connections', ['setActiveRemote']),
 };
 
+export const slideshows = {
+  /**
+   * @type {{ slideshows(): string[], slideshowId(): string }}
+   */
+  computed: mapState('connections', ['slideshows', 'slideshowId']),
+  /**
+   * @type {{ setActiveSlideshow(id: string | null): Promise<void> }}
+   */
+  methods: mapActions('connections', ['setActiveSlideshow']),
+};
+
 export const streams = {
   /**
    * @type {{ incomingCalls(): Call[] }}

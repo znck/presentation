@@ -5,7 +5,7 @@
   "author": "Rahul Kadyan <rahulkdn@gmail.com> (https://znck.dev/)",
   "scripts": {
     "test": "npm run test:unit",
-    "serve": "vue-cli-service serve example/main.js",
+    "serve": "vue-cli-service serve --https example/main.js",
     "build": "vue-cli-service build example/main.js",
     "deploy": "surge --domain accidental.surge.sh dist",
     "dev": "vue-cli-service serve --https src/index.ts",

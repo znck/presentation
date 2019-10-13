@@ -15,7 +15,7 @@ const MODULE: Module<State, RootState> = {
     next({ dispatch, state }) {
       const nextIndex = Math.min(state.currentSlide + 1, state.totalSlides - 1);
 
-      if (nextIndex !== state.currentSlide)  dispatch('setCurrentSlide', nextIndex);
+      if (nextIndex !== state.currentSlide) dispatch('setCurrentSlide', nextIndex);
     },
     previous({ dispatch, state }) {
       const prevIndex = Math.max(state.currentSlide - 1, 0);
@@ -27,6 +27,12 @@ const MODULE: Module<State, RootState> = {
     },
     setTotalSlides({ commit }, totalSlides: number) {
       commit('setTotalSlides', totalSlides);
+    },
+    sync: {
+      root: true,
+      handler({ commit }, payload: { control: State }) {
+        commit('setCurrentSlide', payload.control.currentSlide);
+      },
     },
   },
   mutations: {

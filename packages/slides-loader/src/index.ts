@@ -56,15 +56,13 @@ const SlidesLoader: loader.Loader = rawSource => {
         {
           tag: 'VS',
           props: attributes,
-          children: components,
+          children: [...components, '<slot />'],
         },
       ],
     }) +
     '\n\n' +
     hoists.join('\n\n') +
     '\n';
-
-  console.log(output);
 
   return output;
 };

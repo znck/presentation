@@ -4,7 +4,7 @@ import { createChannel } from '@/peer';
 import { is, create } from '@/peer/standard';
 import WaitScreen from './remote-wait-screen.vue';
 import Controls from './remote-controls.vue';
-import RemoteSyncControl from './remote-sync-control.vue';
+import SyncVuex from '@/store/components/peer-sync-vuex.vue';
 
 const channel = createChannel('remote');
 
@@ -15,6 +15,9 @@ export default {
       type: String,
       required: true,
     },
+    secret: {
+      type: String,
+    },
   },
 
   data: () => ({
@@ -23,7 +26,7 @@ export default {
     deviceId: channel.id,
   }),
 
-  components: { WaitScreen, Controls, RemoteSyncControl },
+  components: { WaitScreen, Controls, SyncVuex },
 
   methods: {
     ...root.methods,
@@ -37,7 +40,7 @@ export default {
       // Connect to server.
       await channel.connect(this.serverId);
       // Request remote control access.
-      await channel.sendMessage(this.serverId, create.request('remote'));
+      await channel.sendMessage(this.serverId, create.request('remote', { secret: this.secret }));
     };
 
     // Reconnect on connection drop.
@@ -95,7 +98,7 @@ export default {
 <template>
   <div :class="$.remote">
     <template v-if="isConnected">
-      <RemoteSyncControl :target="serverId" />
+      <SyncVuex :from="serverId" :to="serverId" />
       <div :class="$.container">
         <Presentation />
         <Controls />

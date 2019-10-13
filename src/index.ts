@@ -6,6 +6,7 @@ import SlidesContainer from '@/store/components/SlidesContainer.vue';
 export async function createApp(Presentation: any) {
   Vue.config.keyCodes.plus = 43;
   Vue.config.keyCodes.minus = 45;
+  Vue.config.devtools = true;
   Vue.component('VS', SlidesContainer);
   Vue.component('VueSlides', SlidesContainer);
   Vue.component('Presentation', Presentation);

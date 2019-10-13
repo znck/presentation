@@ -28,12 +28,14 @@ const MODULE: Module<State, RootState> = {
       let lastSlideshowId = state.slideshowId;
       channel.onMessage((user, message) => {
         if (is.request(message)) {
-          if (message.payload === 'remote') {
+          if (message.payload.resource === 'remote') {
             dispatch('addRemote', user.id);
-            if (lastRemoteId === user.id) dispatch('setActiveRemote', user.id);
-          } else if (message.payload === 'slideshow') {
+            if (lastRemoteId === user.id || message.payload.secret === channel!.secret)
+              dispatch('setActiveRemote', user.id);
+          } else if (message.payload.resource === 'slideshow') {
             dispatch('addSlideshow', user.id);
-            if (lastSlideshowId === user.id) dispatch('setActiveSlideshow', user.id);
+            if (lastSlideshowId === user.id || message.payload.secret === channel!.secret)
+              dispatch('setActiveSlideshow', user.id);
           }
         }
       });
@@ -54,13 +56,25 @@ const MODULE: Module<State, RootState> = {
       });
     },
 
-    async setActiveRemote({ commit }, id: string | null) {
+    async setActiveRemote({ commit, dispatch }, id: string | null) {
       await commit('setActiveRemote', id);
-      if (channel && id) channel.sendMessage(id, create.approve('remote'));
+      if (channel && id) {
+        await channel.sendMessage(id, create.approve('remote'));
+        await dispatch('sync', id)
+      }
     },
-    async setSlideshowRemote({ commit }, id: string | null) {
-      await commit('setSlideshowRemote', id);
-      if (channel && id) channel.sendMessage(id, create.approve('slideshow'));
+    async setActiveSlideshow({ commit, dispatch }, id: string | null) {
+      await commit('setActiveSlideshow', id);
+      if (channel && id) {
+        await channel.sendMessage(id, create.approve('slideshow'));
+        await dispatch('sync', id)
+      }
+    },
+    sync({ rootState }, id: string) {
+      if (channel) {
+        const { control } = rootState as any
+        channel.sendMessage(id, create.vuexAction({ type: 'sync', payload: { control } }))
+      }
     },
     addRemote({ commit, state }, id: string) {
       if (!state.remotes.includes(id)) {
@@ -87,7 +101,7 @@ const MODULE: Module<State, RootState> = {
     setActiveRemote(state, id: string) {
       state.remoteId = id;
     },
-    setSlideshowRemote(state, id: string) {
+    setActiveSlideshow(state, id: string) {
       state.slideshowId = id;
     },
     addRemote(state, id: string) {
