@@ -5,13 +5,14 @@ import streams from './modules/streams';
 import users from './modules/users';
 import control from './modules/control';
 import surface from './modules/surface';
+import questions from './modules/questions';
 import connections from './modules/connections';
 import { Channel } from '@/peer';
 
 Vue.use(Vuex);
 
 const debug = createDebugger('vs:store');
-const modules = { streams, users, control, surface, connections };
+const modules = { streams, users, control, surface, connections, questions };
 let _channel: Channel | null = null;
 
 export interface State {

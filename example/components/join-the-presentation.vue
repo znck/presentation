@@ -4,18 +4,12 @@ import BrownianMotion from './brownian-motion.vue';
 
 export default {
   computed: {
-    // ...mapGetters('users', { users: 'onlineUsers' }),
-    users() {
-      return [
-        { id: '1', name: 'Jane Doe', email: 'jane@example.com' },
-        { id: '2', name: 'John Doe', email: 'john@example.com' },
-      ]
-    },
+    ...mapGetters('users', { users: 'onlineUsers' }),
     ...mapState(['serverId']),
     url() {
       const { protocol, hostname, port } = window.location;
 
-      return `${protocol}//${hostname}${port ? ':' + port : port}/admin?id=${this.serverId}`;
+      return `${protocol}//${hostname}${port ? ':' + port : port}/audience?id=${this.serverId}`;
     },
   },
   components: { BrownianMotion }

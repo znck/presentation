@@ -3,12 +3,16 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 /**
  * @typedef {import('./modules/streams').Call} Call
  * @typedef {import('./modules/users').Person} Person
+ * @typedef {import('./modules/questions').Question} Question
  * @typedef {import('../peer').User} User
  * @typedef {import('../peer').Channel} Channel
  * @typedef {import('../surfaces').SurfaceName} SurfaceName
  */
 
 export const root = {
+  /**
+   * @type {{ serverId(): number }}
+   */
   computed: mapState(['serverId']),
   /**
    * @type {{ setup(channel: Channel): Promise<void>, channel(): Promise<Channel | null> }}
@@ -25,6 +29,17 @@ export const control = {
    * @type {{ next(): Promise<void>, previous(): Promise<void>, setTotalSlides(count: number): Promise<void>, setCurrentSlide(index: number): Promise<void> }}
    */
   methods: mapActions('control', ['next', 'previous', 'setCurrentSlide', 'setTotalSlides']),
+};
+
+export const questions = {
+  /**
+   * @type {{ questions(): Question[]}}
+   */
+  computed: mapState('questions', ['questions']),
+  /**
+   * @type {{ postQuestion(question: Omit<Question, 'answers'>): Promise<void>, closeQuestion(): Promise<void> }}
+   */
+  methods: mapActions('questions', ['postQuestion', 'closeQuestion']),
 };
 
 export const surface = {

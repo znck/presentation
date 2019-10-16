@@ -32,7 +32,34 @@ const enum Action {
   APPROVE = '@vs/approve',
   IDENTITY = '@vs/identity',
   VUEX_ACTION = '@vs/vuex/action',
-  DISCONNECT = 'DISCONNECT',
+  DISCONNECT = '@vs/disconnect',
+  QUESTION = '@vs/question/ask',
+  QUESTION_RESPONSE = '@vs/question/response',
+  QUESTION_CLOSE = '@vs/question/close',
+}
+
+export interface Question {
+  id: number;
+  text: string;
+  options: string[];
+}
+
+export interface QuestionMessage extends Message {
+  type: Action.QUESTION;
+  payload: Question;
+}
+
+export interface QuestionCloseMessage extends Message {
+  type: Action.QUESTION_CLOSE;
+  payload: null;
+}
+
+export interface QuestionResponseMessage extends Message {
+  type: Action.QUESTION_RESPONSE;
+  payload: {
+    id: number;
+    response: unknown;
+  };
 }
 
 export interface RequestMessage extends Message {
@@ -88,6 +115,18 @@ export const create = {
   vuexAction(payload: Message): VuexActionMessage {
     return createMessage(Action.VUEX_ACTION, payload);
   },
+
+  question(question: Question): QuestionMessage {
+    return createMessage(Action.QUESTION, question);
+  },
+
+  questionClose(): QuestionCloseMessage {
+    return createMessage(Action.QUESTION_CLOSE, null);
+  },
+
+  questionResponse(questionId: number, response: unknown): QuestionResponseMessage {
+    return createMessage(Action.QUESTION_RESPONSE, { id: questionId, response });
+  },
 };
 
 function isMessage(message: unknown, type: Action) {
@@ -113,5 +152,17 @@ export const is = {
 
   vuexAction(message: unknown): message is VuexActionMessage {
     return isMessage(message, Action.VUEX_ACTION);
+  },
+
+  question(message: unknown): message is QuestionMessage {
+    return isMessage(message, Action.QUESTION);
+  },
+
+  questionClose(message: unknown): message is QuestionCloseMessage {
+    return isMessage(message, Action.QUESTION_CLOSE);
+  },
+
+  questionResponse(message: unknown): message is QuestionResponseMessage {
+    return isMessage(message, Action.QUESTION_RESPONSE);
   },
 };

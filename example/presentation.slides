@@ -111,21 +111,6 @@ layout: PhotoSlide
 
 </notes>
 
-<!-- slide: Join the presentation -->
-
-<JoinThePresentation />
-
-<notes>
-
-# TODOs
-
-- Ask people to join the presentation.
-- Ask people to use real email address.
-- Communicate privacy policy.
-- Demo a call.
-
-</notes>
-
 <!-- slide: What? -->
 
 #### What do ~~we~~ I want?
@@ -451,6 +436,255 @@ new Vue(App).$mount('#app')
 
 ## `$ vue serve main.js`
 
+<!-- slide: In VS Code as Text -->
+---
+class: window-screenshot
+---
+
+![presentation.slides opened in VS Code](./assets/slides-as-text.png)
+
+
+<!-- slide: Let's create a VS Code extension -->
+
+## We have to tell __VS Code__, "What is `.slides`?"
+
+<!-- slide: Language Extension -->
+
+```json
+{
+  "name": "vscode-slides-language",
+  "version": "1.0.0",
+  "engines": { "vscode": "^1.32.0" },
+  "categories": [ "Programming Languages" ],
+  "contributes": {
+    "languages": [
+      { "id": "slides", "extensions": [".slides" ] }
+    ],
+    "grammars": [{
+      "language": "slides",
+      "scopeName": "source.slides",
+      "path": "./slides.tmLanguage.json"
+    }]
+  }
+}
+```
+
+##### `package.json`
+
+<!-- slide: .slides Language Grammar -->
+
+```json
+{
+  "name": "slides",
+  "scopeName": "source.slides",
+  "patterns": [{ "include": "#slide" }],
+  "repository": {
+    "slide": {
+      "begin": "<!-- slide *-->",
+      "end": "(?=<!-- slide *-->|\\z)",
+      "patterns": [{ "include": "text.html.markdown" }]
+    }
+  }
+}
+```
+
+##### `slides.tmLanguage.json`
+
+<!-- slide: In VS Code as Slides -->
+---
+class: window-screenshot
+---
+
+![presentation.slides opened in VS Code](./assets/slides-as-slides.png)
+
+<!-- slide: Language Extension / Code Folding -->
+
+```json
+{
+  "name": "vscode-slides-language",
+  "version": "1.0.0",
+  "engines": { "vscode": "^1.32.0" },
+  "categories": [ "Programming Languages" ],
+  "contributes": {
+    "languages": [
+      { "id": "slides", "extensions": [".slides" ] }
+    ],
+    "grammars": [{
+      "language": "slides",
+      "scopeName": "source.slides",
+      "path": "./slides.tmLanguage.json"
+    }]
+  },
+  "activationEvents": [
+    "onLanguage:slides"
+  ],
+  "main": "extension.js"
+}
+```
+
+##### `package.json`
+
+
+<!-- slide: Language Extension / Code Folding Implementation -->
+
+```js
+const vscode = require('vscode');
+const slideFoldingRangeProvider = require('./provider')
+
+module.exports = { activate };
+
+function activate() {
+  const selector = { language: 'slides' };
+  
+  vscode.languages.registerFoldingRangeProvider(
+    selector,
+    slideFoldingRangeProvider
+  );
+}
+```
+
+##### `extension.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+
+```js
+const vscode = require('vscode');
+module.exports = {
+  provideFoldingRanges(file) {
+    const source = file.getText();
+    const lines = source.split('\n');
+    const folds = [];
+    let start = 0;
+    lines.forEach((line, index) => {
+      if (line === '<!-- slide *-->') {
+        folds.push(new vscode.FoldingRange(
+          start, index - 1, 
+          vscode.FoldingRangeKind.Region
+        ));
+        start = index;
+      }
+    });
+    return folds;
+  }
+};
+```
+
+##### `provider.js`
+
+<!-- slide: In VS Code as Slides with code folding -->
+---
+class: window-screenshot
+---
+
+![presentation.slides opened in VS Code](./assets/slides-folded.png)
+
+<!-- slide: In VS Code, this presentation with code folding -->
+---
+class: window-screenshot
+---
+
+![presentation.slides opened in VS Code](./assets/this-presentation-folded.png)
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- To present code
+- To embed demos
+- To use familiar tools
+- To program and extend
+
+<!-- slide: Demo code presentation -->
+
+```js 2
+function HelloWorld() {
+  console.log('Code as it should be');
+}
+```
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- ~~To present code~~
+- To embed demos
+- To use familiar tools
+- To program and extend
+
+<!-- slide: Demo embed - Source -->
+
+```md
+<!-- slide *-->
+<Counter />
+```
+
+<!-- slide: Demo embed -->
+
+<Counter />
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- ~~To present code~~
+- ~~To embed demos~~
+- To use familiar tools
+- To program and extend
+
+<!-- slide: Tools -->
+
+#### Tools Used
+
+- Markdown
+- Vue
+- Vue CLI
+- VS Code
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- ~~To present code~~
+- ~~To embed demos~~
+- ~~To use familiar tools~~
+- To program and extend
+
+<!-- slide: Program and Extend -->
+
+`Markdown -> Vue -> JavaScript -> Do Anything`
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- ~~To present code~~
+- ~~To embed demos~~
+- ~~To use familiar tools~~
+- ~~To program and extend~~
+
+<!-- slide: Join the presentation -->
+
+<JoinThePresentation />
+
+<notes>
+
+# TODOs
+
+- Ask people to join the presentation.
+- Ask people to use real email address.
+- Communicate privacy policy.
+- Demo a call.
+
+</notes>
+
+<!-- slide: Ask a question? -->
+
+<Question 
+  type="vote" 
+  text="What next?" 
+  :options="['Demo', 'How it works?']"
+/>
+
 <!-- slide: About -->
 
 <h1 class="cp mono">@znck0</h1>
@@ -547,5 +781,9 @@ strong, em, .cp {
 
 .slide-template-to-markdown pre {
   font-size: 1.75vw;
+}
+
+.window-screenshot img {
+  height: 50vw;
 }
 </style>

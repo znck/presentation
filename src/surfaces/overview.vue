@@ -1,6 +1,7 @@
 <script>
-import Events from "vue-global-events";
-import { control } from "@/store/helpers";
+import Events from 'vue-global-events';
+import { control } from '@/store/helpers';
+import ProvideSlideIndex from '@/components/ProvideSlideIndex.vue';
 import KeyboardNavigation from '@/store/components/KeyboardNavigation';
 
 export default {
@@ -13,7 +14,7 @@ export default {
 
   computed: control.computed,
 
-  components: { Events, KeyboardNavigation },
+  components: { Events, KeyboardNavigation, ProvideSlideIndex },
 
   data: () => ({
     zoom: 1,
@@ -26,11 +27,11 @@ export default {
   },
 
   mounted() {
-    window.addEventListener("resize", this.resize, { passive: true });
+    window.addEventListener('resize', this.resize, { passive: true });
   },
 
   destroyed() {
-    window.removeEventListener("resize", this.resize);
+    window.removeEventListener('resize', this.resize);
   },
 
   methods: {
@@ -46,9 +47,9 @@ export default {
      */
     onKeyDown(event) {
       if (event.ctrlKey || event.metaKey) return;
-      if (event.altKey && event.code === "Equal") {
+      if (event.altKey && event.code === 'Equal') {
         this.size = window.innerWidth / Math.max(1, this.column - 1);
-      } else if (event.altKey && event.code === "Minus") {
+      } else if (event.altKey && event.code === 'Minus') {
         this.size = window.innerWidth / Math.min(10, this.totalSlides, this.column + 1);
       }
     },
@@ -79,7 +80,9 @@ export default {
       @mousedown.stop="setCurrentSlide(index)"
     >
       <div :class="$.wrapper">
-        <slot :name="index"></slot>
+        <ProvideSlideIndex :index="index" :key="index">
+          <slot :name="index"></slot>
+        </ProvideSlideIndex>
       </div>
     </div>
     <Events @keydown="onKeyDown" />

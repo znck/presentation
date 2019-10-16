@@ -2,6 +2,7 @@
 import { control } from '@/store/helpers';
 import FitAspectRatio from '@/components/FitAspectRatio.vue';
 import Timer from '@/components/Timer.vue';
+import ProvideSlideIndex from '@/components/ProvideSlideIndex.vue';
 import KeyboardNavigation from '@/store/components/KeyboardNavigation';
 
 export default {
@@ -25,7 +26,7 @@ export default {
   computed: control.computed,
   methods: control.methods,
 
-  components: { FitAspectRatio, KeyboardNavigation, Timer },
+  components: { FitAspectRatio, KeyboardNavigation, Timer, ProvideSlideIndex },
 };
 </script>
 
@@ -34,8 +35,14 @@ export default {
     <div :class="$.currentSlide">
       <FitAspectRatio :aspectRatio="aspectRatio * 2">
         <div :class="$.currentSlideWrapper">
-          <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="(width - 32) / 2 / width" style="--fix-origin: center">
-            <slot :name="currentSlide" />
+          <FitAspectRatio
+            :aspectRatio="aspectRatio"
+            :multiplier="(width - 32) / 2 / width"
+            style="--fix-origin: center"
+          >
+            <ProvideSlideIndex :index="currentSlide" :key="currentSlide">
+              <slot :name="currentSlide" />
+            </ProvideSlideIndex>
           </FitAspectRatio>
           <div :class="$.notes">
             <slot :name="'notes-' + currentSlide" />
@@ -46,7 +53,9 @@ export default {
 
     <div :class="$.nextSlide" @click.capture.stop="next">
       <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="(width - 160) / 2 / width * 0.8">
-        <slot :name="currentSlide + 1" />
+        <ProvideSlideIndex :index="currentSlide + 1" :key="currentSlide + 1">
+          <slot :name="currentSlide + 1" />
+        </ProvideSlideIndex>
       </FitAspectRatio>
     </div>
 

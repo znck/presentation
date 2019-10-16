@@ -239,6 +239,15 @@ export function createChannel(asController: boolean | User['role'] = false) {
         connection.send(message);
       });
     },
+    broadcast(type: string | Message, payload?: unknown) {
+      return doWhenReadyPromise(async () => {
+        Object.values(dataConnections).forEach(connection => {
+          const message = typeof type === 'string' ? { type, payload } : type;
+          debug(`send ::`, message);
+          connection.send(message);
+        });
+      });
+    },
     startCall(id: string, stream: MediaStream, meta: unknown = {}): Promise<MediaStream> {
       return doWhenReadyPromise(() => {
         return new Promise(resolve => {

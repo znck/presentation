@@ -22,7 +22,7 @@ export default {
 
       channel.setName('Slideshow Target');
       channel.setRole('slideshow');
-      this.$store.commit('SET_SERVER_ID', this.id);
+      await this.$store.commit('SET_SERVER_ID', this.id);
 
       if (this.secret) channel.secret = this.secret;
 

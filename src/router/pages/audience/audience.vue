@@ -1,6 +1,7 @@
 <script>
 import { root, streams, users } from '@/store/helpers';
 import { createChannel } from '@/peer';
+import Question from './question.vue';
 
 const channel = createChannel(false);
 
@@ -37,6 +38,9 @@ export default {
       return this.incomingCalls.find(call => call.user.id === this.id);
     },
   },
+  components: {
+    Question,
+  },
   methods: {
     ...root.methods,
     ...streams.methods,
@@ -61,6 +65,10 @@ export default {
     },
   },
   async created() {
+    if (this.id) {
+      await this.$store.commit('SET_SERVER_ID', this.id);
+    }
+
     this.setup(channel);
   },
   watch: {
@@ -84,16 +92,28 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <form class="intro" v-if="status !== 'connected'" @submit.prevent="connect">
+  <div :class="$.container">
+    <form v-if="status !== 'connected'" @submit.prevent="connect">
       <label>
-        Name:
-        <input type="text" name="name" required v-model="name" />
+        Name
+        <input
+          type="text"
+          name="name"
+          required
+          v-model="name"
+          :disabled="status === 'connecting'"
+        />
       </label>
 
       <label>
-        Email:
-        <input type="email" name="email" required v-model="email" />
+        Email
+        <input
+          type="email"
+          name="email"
+          required
+          v-model="email"
+          :disabled="status === 'connecting'"
+        />
       </label>
 
       <button
@@ -102,17 +122,49 @@ export default {
       >{{ status === 'connecting' ? 'Please wait...' : 'Start!' }}</button>
     </form>
 
-    <div class="info" v-else>
-      Connected to {{ server.name }}
-      <video autoplay ref="video"></video>
-      <button type="button" @click="callServer">Call</button>
+    <div :class="$.content" v-else>
+      <Question />
+      <code>connected</code>
     </div>
   </div>
 </template>
 
-<style>
-video {
-  max-width: 100vw;
-  max-height: 100vh;
+<style module="$">
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.container label,
+.container input {
+  display: block;
+}
+
+.container label {
+  margin-bottom: 1rem;
+}
+.container input {
+  width: 300px;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+
+.container button {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.content > code {
+  position: fixed;
+  bottom: 1rem;
+  margin: 0 auto;
 }
 </style>

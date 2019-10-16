@@ -27,7 +27,7 @@ export function createRouter() {
       {
         path: '/audience',
         name: 'audience',
-        component: () => import('./pages/audience.vue'),
+        component: () => import('./pages/audience/audience.vue'),
         props: route => ({ id: route.query.id }),
       },
     ],
