@@ -10,7 +10,7 @@ export function createRouter() {
       {
         path: '/',
         name: 'slideshow',
-        component: () => import('./pages/slideshow.vue') as any,
+        component: () => import('./pages/slideshow/slideshow.vue') as any,
         props: route => ({ id: route.query.id, secret: route.query.secret }),
       },
       {

@@ -9,6 +9,7 @@ import { mapState, mapActions, mapGetters } from 'vuex';
  */
 
 export const root = {
+  computed: mapState(['serverId']),
   /**
    * @type {{ setup(channel: Channel): Promise<void>, channel(): Promise<Channel | null> }}
    */
@@ -71,11 +72,11 @@ export const slideshows = {
 
 export const streams = {
   /**
-   * @type {{ incomingCalls(): Call[] }}
+   * @type {{ activeCalls(): Call[], incomingCalls(): Call[] }}
    */
-  computed: mapGetters('streams', ['incomingCalls']),
+  computed: mapGetters('streams', ['activeCalls', 'incomingCalls']),
   /**
-   * @type {{ call(payload: { user: User, stream: MediaStream }), acceptCall(payload: { user: User, stream?: MediaStream }), getCallStream(id: string): MediaStream | undefined }}
+   * @type {{ call(payload: { user: User, stream: MediaStream }): Promise<MediaStream | null>, acceptCall(payload: { user: User, stream?: MediaStream }): Promise<MediaStream>, endCall(payload: { user: User }): Promise<void>, getCallStream(id: string): MediaStream | undefined }}
    */
-  methods: mapActions('streams', ['call', 'getCallStream', 'acceptCall']),
+  methods: mapActions('streams', ['call', 'getCallStream', 'acceptCall', 'endCall']),
 };

@@ -1,6 +1,7 @@
 <script>
 import Events from "vue-global-events";
 import { control } from "@/store/helpers";
+import KeyboardNavigation from '@/store/components/KeyboardNavigation';
 
 export default {
   props: {
@@ -12,7 +13,7 @@ export default {
 
   computed: control.computed,
 
-  components: { Events },
+  components: { Events, KeyboardNavigation },
 
   data: () => ({
     zoom: 1,
@@ -75,13 +76,14 @@ export default {
       v-for="(value, index) in totalSlides"
       :class="[$.item, currentSlide == index ? $.current : null]"
       :key="index"
-      @mousedown="setCurrentSlide(index)"
+      @mousedown.stop="setCurrentSlide(index)"
     >
       <div :class="$.wrapper">
         <slot :name="index"></slot>
       </div>
     </div>
     <Events @keydown="onKeyDown" />
+    <KeyboardNavigation />
   </div>
 </template>
 
@@ -95,6 +97,7 @@ export default {
   grid-column-gap: 16px;
   grid-row-gap: 16px;
   padding: 16px;
+  background: darkgray;
 }
 
 .item {

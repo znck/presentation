@@ -56,16 +56,18 @@ const MODULE: Module<State, RootState> = {
       });
     },
 
-    async setActiveRemote({ commit, dispatch }, id: string | null) {
+    async setActiveRemote({ commit, dispatch, state }, id: string | null) {
       await commit('setActiveRemote', id);
       if (channel && id) {
+        if (state.remoteId && id !== state.remoteId) await channel.sendMessage(state.remoteId, create.disconnect('remote'))
         await channel.sendMessage(id, create.approve('remote'));
         await dispatch('sync', id)
       }
     },
-    async setActiveSlideshow({ commit, dispatch }, id: string | null) {
+    async setActiveSlideshow({ commit, dispatch, state }, id: string | null) {
       await commit('setActiveSlideshow', id);
       if (channel && id) {
+        if (state.slideshowId && id !== state.slideshowId) await channel.sendMessage(state.slideshowId, create.disconnect('remote'))
         await channel.sendMessage(id, create.approve('slideshow'));
         await dispatch('sync', id)
       }

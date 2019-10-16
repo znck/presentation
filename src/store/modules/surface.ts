@@ -1,21 +1,22 @@
-import { Module } from "vuex";
-import { State as RootState } from "@/store";
-import { SurfaceName, hasSurface } from "@/surfaces";
+import { Module } from 'vuex';
+import { State as RootState } from '@/store';
+import { SurfaceName, hasSurface } from '@/surfaces';
 
 interface State {
   surface: string;
 }
 
-export const SET_SURFACE = "setSurface";
+export const SET_SURFACE = 'setSurface';
 
 const MODULE: Module<State, RootState> = {
   state: () => ({
-    surface: "slideshow",
+    surface: 'slideshow',
   }),
   getters: {},
   actions: {
-    setSurface({ commit }, surface: SurfaceName) {
-      commit(SET_SURFACE, hasSurface(surface) ? surface : 'broken')
+    setSurface({ commit, rootState }, surface: SurfaceName) {
+      if (surface === 'admin' && rootState.role !== 'admin') surface = 'speaker';
+      commit(SET_SURFACE, hasSurface(surface) ? surface : 'broken');
     },
   },
   mutations: {

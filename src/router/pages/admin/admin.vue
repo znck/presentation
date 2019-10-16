@@ -4,10 +4,11 @@ import User from '@/components/User';
 import SurfaceSwitcher from '@/store/components/SurfaceSwitcher.vue';
 import AdminRemoteConnection from '@/router/pages/admin/admin-remote-connection.vue';
 import AdminSlideshowConnection from '@/router/pages/admin/admin-slideshow-connection.vue';
+import AdminCallConnections from '@/router/pages/admin/admin-call-connections.vue';
 import { createChannel } from '@/peer';
 import { root, users, streams, surface } from '@/store/helpers';
 
-const channel = createChannel('admin');
+const channel = createChannel(true);
 
 const isPresentationSupported = 'presentation' in navigator;
 const { protocol, hostname, port } = window.location;
@@ -30,52 +31,20 @@ export default {
     ...users.computed,
     ...streams.computed,
     ...surface.computed,
-    incomingIds() {
-      return new Set(this.incomingCalls.map(call => call.user.id));
-    },
-    audienceURL() {
-      const id = this.id;
-      const { protocol, hostname, port } = window.location;
-
-      return `${protocol}//${hostname}${port ? ':' + port : ''}/audience?id=${id}`;
-    },
-    slideshowURL() {
-      const id = this.id;
-      const { protocol, hostname, port } = window.location;
-
-      return `${protocol}//${hostname}${port ? ':' + port : ''}?id=${id}`;
-    },
   },
-  created() {
-    this.setup(channel);
-    this.setSurface('admin');
+  async created() {
+    await this.setup(channel);
+    await this.setSurface('admin');
   },
   methods: {
     ...streams.methods,
     ...root.methods,
     ...surface.methods,
-    async answer(user, type = 'none') {
-      await this.acceptCall({ user, stream: await navigator.mediaDevices.getDisplayMedia() });
-      this.activeCallId = user.id;
-    },
-    async startCall(user, type = 'none') {
-      await this.call({ user, stream: await navigator.mediaDevices.getUserMedia({ audio: true, video: true }) });
-      this.activeCallId = user.id;
-    },
-    async addAsRemote(user) {},
     async startPresenting() {
       const connection = await request.start();
     },
   },
-  watch: {
-    async activeCallId(id) {
-      const stream = await this.getCallStream(id);
-      if (stream) {
-        this.$refs.video.srcObject = stream;
-      }
-    },
-  },
-  components: { User, SurfaceSwitcher, AdminRemoteConnection, AdminSlideshowConnection, Events },
+  components: { User, SurfaceSwitcher, AdminRemoteConnection, AdminSlideshowConnection, Events, AdminCallConnections },
 };
 </script>
 
@@ -86,12 +55,21 @@ export default {
     <Events @keydown.alt.80.exact="startPresenting" />
     <div :class="$.controls">
       <AdminRemoteConnection :id="id" />
-      <AdminSlideshowConnection />
+      <AdminSlideshowConnection :id="id" />
+      <AdminCallConnections :id="id" />
     </div>
   </div>
 </template>
 
 <style module="$">
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .controls {
   position: fixed;
   bottom: 0;

@@ -1,75 +1,551 @@
 ---
 aspectRatio: 1.77777778
-timer: 120
+timer: 30
+title: Building your own presentation framework
+shortTitle: 'DIY: Presentation Framework'
+description: Connect.Tech 2019
+author: Rahul Kadyan <rahulkdn@gmail.com> [https://znck.me]
+twitter: '@znck0'
 defaults:
   layout: Slide
 ---
 
-<!-- slide -->
-# Slide 1
+<!-- slide: Introduction -->
+
+<h1>
+  Building your own 
+  <span class="cp">Presentation</span>
+  Framework
+</h1>
+
+<!-- slide: Why? -->
+
+<h2>
+  <span class="cp">Why</span> build your own<br>
+  presentation framework?
+</h2>
+
+<!-- slide: Reason 1: Presenting Code -->
+---
+layout: PhotoSlide
+---
+
+## Presenting __code__ is a horror show.
+
+![sucks](./assets/your-code-sucks.png)
 
 <notes>
 
-# This is now
+# Key Problems
 
-Or this is never
+- No syntax highlight
+- Some editors (VS Code) support copying
+  - Often requires tweaking
+  - Editing copied code is not possible
+  - Keep gist/snippets
+- Still no line numbers
+- Converting to images
 
 </notes>
 
-<!-- slide -->
-# Slide 2
+<!-- slide: Example/Demo — Code -->
+
+```js
+function HelloWorld() {
+  console.log('Code as it should be');
+}
+```
+
+<!-- slide: Example/Demo — Line Highlight Code -->
+
+```js 2
+function HelloWorld() {
+  console.log('Code as it should be');
+}
+```
+
+<!-- slide: Reason 2: Context switch in Demos -->
+---
+layout: PhotoSlide
+---
+
+![understand](./assets/computers-understand-me.png)
+
+## __Demos__ require context switch.
 
 <notes>
 
-# This is Slide 2
+# Key Problems
 
-Or Next is slide 3!
+- Demos require browser
+- To and fro between browser and presentation
+  - Breaks context
 
 </notes>
 
-<!-- slide -->
-# Slide 3
 
-<!-- slide -->
-# Slide 4
+<!-- slide: Example/Demo — Embedded Demo -->
 
-<!-- slide -->
-# Slide 5
+#### Embed Demo
 
-<!-- slide -->
-# Slide 6
+<h3><br></h3>
 
-<!-- slide -->
-# Slide 7
+<Counter />
 
-<!-- slide -->
-# Slide 8
+<!-- slide: Reason 3: Limitted by the tool. -->
+---
+layout: PhotoSlide
+---
 
-<!-- slide -->
-# Slide 9
+## Limitted by the __tools__
 
-<!-- slide -->
-# Slide 10
+![understand](./assets/computers-understand-me.png)
+
+<notes>
+
+# Key Problems
+
+- Cannot reuse code/style
+- Difficult to use VCS
+- You can do only what's allowed.
+
+</notes>
+
+<!-- slide: Join the presentation -->
+
+<JoinThePresentation />
+
+<notes>
+
+# TODOs
+
+- Ask people to join the presentation.
+- Ask people to use real email address.
+- Communicate privacy policy.
+- Demo a call.
+
+</notes>
+
+<!-- slide: What? -->
+
+#### What do ~~we~~ I want?
+
+- To present code
+- To embed demos
+- To use familiar tools
+- To program and extend
+
+<!-- slide: Basic Presentation Framework -->
+
+```vue 
+<template>
+  <div 
+    @keydown.arrow-right="current += 1"
+    @keydown.arrow-left="current -= 1"
+  >
+    <slot :name="current"></slot>
+  </div>
+</template>
 
 <script>
-import Slide from "./slide.vue";
+export default {
+  data: () => ({
+    current: 0,
+  }),
+}
+</script>
+```
+
+##### `slides.vue`
+
+
+<!-- slide: Using Basic Presentation Framework -->
+
+```vue
+<template>
+  <Slides>
+    <template #0>Slide 1</template>
+    <template #1>Slide 2</template>
+    <template #2>Slide 3</template>
+  </Slides>
+</template>
+```
+
+##### `presentation.vue`
+
+<!-- slide: Demo of Basic Presentation Framework -->
+
+<BasicUsage />
+
+<!-- slide: Overiew Mode in Basic Presentation Framework -->
+
+```vue 
+<template>
+  <div>
+    <slot 
+      v-for="slide in totalSlides" 
+      :name="slide"
+    ></slot>
+  </div>
+</template>
+```
+
+##### `overview.vue`
+
+<!-- slide: Using Basic Presentation Framework -->
+
+```vue
+<template>
+  <Overview>
+    <template #0>Slide 1</template>
+    <template #1>Slide 2</template>
+    <template #2>Slide 3</template>
+  </Overview>
+</template>
+```
+
+##### `presentation.vue`
+
+<!-- slide: Demo Basic Overview Mode -->
+
+<BasicOverviewUsage />
+
+<!-- slide: Demo Overview Mode -->
+
+<SwitchToOverview />
+
+<!-- slide: Using Basic Presentation Framework -->
+
+```vue
+<template>
+  <Overview>
+    <template #0>Slide 1</template>
+    <template #1>Slide 2</template>
+    <template #2>Slide 3</template>
+  </Overview>
+</template>
+```
+
+<!-- slide: Template API -->
+
+```vue
+<template>
+  <Slides>
+    <template #0>
+      <Slide>
+        <h1>The best presentation framework</h1>
+      </Slide>
+    </template>
+    
+    <template #1>
+      <Slide>
+        <h1>PowerPoint is not for programmers</h1>
+      </Slide>
+    </template>
+    
+    <template #1>
+      <Slide>
+        <h1>Keynote is a compromise</h1>
+      </Slide>
+    </template>
+  </Slides>
+</template>
+```
+
+<!-- slide: Markdown API -->
+
+```md
+# The best presentation framework
+
+# PowerPoint is not for programmers
+
+# Keynote is a compromise
+
+```
+
+<!-- slide: Template to Markdown API -->
+---
+layout: TwoColumn
+class: slide-template-to-markdown
+---
+
+```md
+# The best presentation framework
+
+# PowerPoint is not for programmers
+
+# Keynote is a compromise
+
+```
+
+```vue
+<template>
+  <Slides>
+    <template #0>
+      <Slide>
+        <h1>The best presentation framework</h1>
+      </Slide>
+    </template>
+    
+    <template #1>
+      <Slide>
+        <h1>PowerPoint is not for programmers</h1>
+      </Slide>
+    </template>
+    
+    <template #1>
+      <Slide>
+        <h1>Keynote is a compromise</h1>
+      </Slide>
+    </template>
+  </Slides>
+</template>
+```
+
+<!-- slide: Slide separator for Markdown API -->
+
+```md
+<!-- slide *-->
+# The best presentation framework
+
+<!-- slide *-->
+# PowerPoint is not for programmers
+
+<!-- slide *-->
+# Keynote is a compromise
+
+```
+
+<!-- slide: Extracting slides from Markdown -->
+
+```js
+const sources = source.split('<!-- slide *-->')
+/*
+  [
+    `# The best presentation framework`,
+    `# PowerPoint is not for programmers`,
+    `# Keynote is a compromise`,
+  ]
+*/
+
+
+
+```
+
+<!-- slide: Extracting slides from Markdown -->
+
+```js
+const sources = source.split('<!-- slide *-->')
+const slides = sources.map(currentSource => {
+  return md.render(currentSource);
+})
+
+
+
+
+
+
+
+```
+
+<!-- slide: Converting Markdown to SFC -->
+
+```js
+const sources = source.split('<!-- slide *-->')
+const slides = sources.map(currentSource => {
+  return md.render(currentSource);
+})
+const sfc = `
+<template>
+  ${slides.map((slide, index) => (
+    `<template #${index}}>${slide}</template>`
+  )).join('\n')}
+</template>
+`
+```
+
+<!-- slide: Converting Markdown to SFC -->
+```js
+const sources = source.split('<!-- slide *-->')
+const slides = sources.map(currentSource => {
+  return md.render(currentSource);
+})
+const sfc = `
+<template>
+  ${slides.map((slide, index) => (
+    `<template #${index}}>${slide}</template>`
+  )).join('\n')}
+</template>
+`
+```
+
+<!-- slide: Converting Markdown to SFC -->
+```js
+const md = require('markdown-it')();
+
+module.exports = function SlidesLoader(source) {
+  const sources = source.split('<!-- slide *-->')
+  const slides = sources.map(currentSource => {
+    return md.render(currentSource);
+  })
+  const sfc = `
+  <template>
+    ${slides.map((slide, index) => (
+      `<template #${index}}>${slide}</template>`
+    )).join('\n')}
+  </template>
+  `
+  return sfc;
+}
+```
+
+##### `slides-loader.js`
+
+<!-- slide: Using the loader -->
+
+```js
+module.exports = {
+  chainWebpack(config) {
+    config.module.rule('slides')
+      .test(/\.slides$/)
+      .use('vue-loader')
+        .loader('vue-loader')
+        .end()
+      .use('slides-loader')
+        .loader(require.resolve('./slides-loader'))
+        .end()
+  }
+}
+```
+
+##### `vue.config.js`
+
+<!-- slide: Slide separator for Markdown API -->
+
+```md
+<!-- slide *-->
+# The best presentation framework
+
+<!-- slide *-->
+# PowerPoint is not for programmers
+
+<!-- slide *-->
+# Keynote is a compromise
+
+```
+
+##### `presentation.slides`
+
+<!-- slide: Create vue app -->
+
+```js
+import Vue from 'vue'
+import App from './presentation.slides'
+
+new Vue(App).$mount('#app')
+```
+
+##### `main.js`
+
+<!-- slide: Start dev server -->
+
+## `$ vue serve main.js`
+
+<!-- slide: About -->
+
+<h1 class="cp mono">@znck0</h1>
+
+### Rahul Kadyan
+
+<!-- slide: Fin. -->
+
+<script>
+import { layouts } from "./layouts";
+import BasicUsage from './components/basic-usage.vue';
+import BasicOverviewUsage from './components/basic-overview-usage.vue';
+import Counter from './components/counter.vue';
+import JoinThePresentation from './components/join-the-presentation.vue';
+import SwitchToOverview from './components/switch-to-overview.vue';
 
 export default {
-  components: { Slide },
+  components: { ...layouts, BasicUsage, Counter, JoinThePresentation, SwitchToOverview, BasicOverviewUsage },
 };
 </script>
 
 <style>
-.slide h1 {
-  font-size: 10vw;
-}
-
 html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --color-primary: #42B983;
+  --color-secondary: #39495C;
+}
+
+code, pre, .mono {
+  font-family: 'Fira Code', monospace;
 }
 
 body {
   height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 10vw;
+}
+
+h2 {
+  font-size: 8vw;
+}
+
+h3 {
+  font-size: 6vw;
+}
+
+h4 {
+  font-size: 4vw;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p, ul {
+  font-size: 3vw;
+}
+
+pre {
+  font-size: 2vw;
+}
+
+ul, pre {
+  text-align: left;
+}
+
+strong, em, .cp {
+  color: var(--color-primary);
+}
+
+.cs {
+  color: var(--color-secondary);
+}
+
+.notes {
+  padding: 2vw;
+}
+
+.notes p, .notes ul {
+  font-size: 1.5vw;
+}
+
+.notes h1 {
+  font-size: 2vw;
+}
+
+.slide-template-to-markdown pre {
+  font-size: 1.75vw;
 }
 </style>

@@ -18,6 +18,7 @@ export default {
     @keydown.alt.49.exact="setSurface('slideshow')"
     @keydown.alt.50.exact="setSurface('speaker')"
     @keydown.alt.51.exact="setSurface('overview')"
+    @keydown.alt.52.exact="setSurface('admin')"
     @keydown.alt.70.exact="fullScreen"
   />
 </template>

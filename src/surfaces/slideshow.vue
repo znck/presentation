@@ -1,8 +1,8 @@
 <script>
-import { control } from "@/store/helpers";
-import KeyboardNavigation from "@/store/components/KeyboardNavigation";
-import MouseNavigation from "@/store/components/MouseNavigation";
-import FitAspectRatio from "@/components/FitAspectRatio";
+import { control } from '@/store/helpers';
+import KeyboardNavigation from '@/store/components/KeyboardNavigation';
+import MouseNavigation from '@/store/components/MouseNavigation';
+import FitAspectRatio from '@/components/FitAspectRatio';
 
 export default {
   props: {

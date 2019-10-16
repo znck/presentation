@@ -1,0 +1,781 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": null
+  },
+  "1 debug pnpm": {
+    "isCaseSensitive": false,
+    "store": "/Users/znck/.pnpm-store/2"
+  },
+  "2 debug pnpm:package-json": {
+    "initial": {
+      "name": "@znck/slides-loader",
+      "version": "0.0.0",
+      "description": "",
+      "main": "lib/index.js",
+      "keywords": [],
+      "author": "Rahul Kadyan <rahulkdn@gmail.com> (https://znck.dev/)",
+      "license": "MIT",
+      "devDependencies": {
+        "@types/markdown-it": "^0.0.9",
+        "@types/webpack": "^4.39.3",
+        "de-indent": "^1.0.2",
+        "typescript": "^3.6.4",
+        "webpack": "^4.41.1"
+      },
+      "dependencies": {
+        "front-matter": "^3.0.2",
+        "markdown-it": "^10.0.0",
+        "markdown-it-prism": "^2.0.3"
+      }
+    },
+    "prefix": "/Users/znck/Workspace/znck/presentation/packages/slides-loader"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@types/markdown-it/0.0.9",
+    "wanted": {
+      "name": "@types/markdown-it",
+      "rawSpec": "@types/markdown-it@^0.0.9"
+    }
+  },
+  "5 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/markdown-it/0.0.9",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "6 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@types/webpack/4.39.3",
+    "wanted": {
+      "name": "@types/webpack",
+      "rawSpec": "@types/webpack@^4.39.3"
+    }
+  },
+  "7 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/webpack/4.39.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "8 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/de-indent/1.0.2",
+    "wanted": {
+      "name": "de-indent",
+      "rawSpec": "de-indent@^1.0.2"
+    }
+  },
+  "9 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/de-indent/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "10 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/typescript/3.6.4",
+    "wanted": {
+      "name": "typescript",
+      "rawSpec": "typescript@^3.6.4"
+    }
+  },
+  "11 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/3.6.4",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "12 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/webpack/4.41.1",
+    "wanted": {
+      "name": "webpack",
+      "rawSpec": "webpack@^4.41.1"
+    }
+  },
+  "13 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/front-matter/3.0.2",
+    "wanted": {
+      "name": "front-matter",
+      "rawSpec": "front-matter@^3.0.2"
+    }
+  },
+  "14 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/front-matter/3.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "15 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/markdown-it/10.0.0",
+    "wanted": {
+      "name": "markdown-it",
+      "rawSpec": "markdown-it@^10.0.0"
+    }
+  },
+  "16 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/markdown-it/10.0.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "17 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/markdown-it-prism/2.0.3",
+    "wanted": {
+      "name": "markdown-it-prism",
+      "rawSpec": "markdown-it-prism@^2.0.3"
+    }
+  },
+  "18 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/markdown-it-prism/2.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "19 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/webpack/4.39.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "20 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@types/markdown-it/0.0.9",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "21 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/de-indent/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "22 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/front-matter/3.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "23 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/markdown-it/10.0.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "24 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/markdown-it-prism/2.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "25 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/webpack/4.41.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "26 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/webpack/4.41.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "27 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@webassemblyjs/ast/1.8.5",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "@webassemblyjs/ast",
+      "rawSpec": "@webassemblyjs/ast@1.8.5"
+    }
+  },
+  "28 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/ast/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "29 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@webassemblyjs/wasm-edit/1.8.5",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "@webassemblyjs/wasm-edit",
+      "rawSpec": "@webassemblyjs/wasm-edit@1.8.5"
+    }
+  },
+  "30 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/wasm-edit/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "31 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@webassemblyjs/helper-module-context/1.8.5",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "@webassemblyjs/helper-module-context",
+      "rawSpec": "@webassemblyjs/helper-module-context@1.8.5"
+    }
+  },
+  "32 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/helper-module-context/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "33 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/@webassemblyjs/wasm-parser/1.8.5",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "@webassemblyjs/wasm-parser",
+      "rawSpec": "@webassemblyjs/wasm-parser@1.8.5"
+    }
+  },
+  "34 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/wasm-parser/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "35 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/acorn/6.3.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "acorn",
+      "rawSpec": "acorn@^6.2.1"
+    }
+  },
+  "36 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/acorn/6.3.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "37 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ajv/6.10.2",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "ajv",
+      "rawSpec": "ajv@^6.10.2"
+    }
+  },
+  "38 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv/6.10.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "39 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ajv-keywords/3.4.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "ajv-keywords",
+      "rawSpec": "ajv-keywords@^3.4.1"
+    }
+  },
+  "40 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/chrome-trace-event/1.0.2",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "chrome-trace-event",
+      "rawSpec": "chrome-trace-event@^1.0.2"
+    }
+  },
+  "41 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/chrome-trace-event/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "42 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/enhanced-resolve/4.1.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "enhanced-resolve",
+      "rawSpec": "enhanced-resolve@^4.1.0"
+    }
+  },
+  "43 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/enhanced-resolve/4.1.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "44 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/eslint-scope/4.0.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "eslint-scope",
+      "rawSpec": "eslint-scope@^4.0.3"
+    }
+  },
+  "45 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint-scope/4.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "46 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/json-parse-better-errors/1.0.2",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "json-parse-better-errors",
+      "rawSpec": "json-parse-better-errors@^1.0.2"
+    }
+  },
+  "47 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/json-parse-better-errors/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "48 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/loader-runner/2.4.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "loader-runner",
+      "rawSpec": "loader-runner@^2.4.0"
+    }
+  },
+  "49 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/loader-runner/2.4.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "50 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/loader-utils/1.2.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "loader-utils",
+      "rawSpec": "loader-utils@^1.2.3"
+    }
+  },
+  "51 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/loader-utils/1.2.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "52 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/memory-fs/0.4.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "memory-fs",
+      "rawSpec": "memory-fs@^0.4.1"
+    }
+  },
+  "53 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/memory-fs/0.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "54 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/micromatch/3.1.10",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "micromatch",
+      "rawSpec": "micromatch@^3.1.10"
+    }
+  },
+  "55 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/micromatch/3.1.10",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "56 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/mkdirp/0.5.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "mkdirp",
+      "rawSpec": "mkdirp@^0.5.1"
+    }
+  },
+  "57 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/mkdirp/0.5.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "58 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/neo-async/2.6.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "neo-async",
+      "rawSpec": "neo-async@^2.6.1"
+    }
+  },
+  "59 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/neo-async/2.6.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "60 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/node-libs-browser/2.2.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "node-libs-browser",
+      "rawSpec": "node-libs-browser@^2.2.1"
+    }
+  },
+  "61 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/node-libs-browser/2.2.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "62 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/schema-utils/1.0.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "schema-utils",
+      "rawSpec": "schema-utils@^1.0.0"
+    }
+  },
+  "63 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/schema-utils/1.0.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "64 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/tapable/1.1.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "tapable",
+      "rawSpec": "tapable@^1.1.3"
+    }
+  },
+  "65 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/tapable/1.1.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "66 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "terser-webpack-plugin",
+      "rawSpec": "terser-webpack-plugin@^1.4.1"
+    }
+  },
+  "67 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/watchpack/1.6.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "watchpack",
+      "rawSpec": "watchpack@^1.6.0"
+    }
+  },
+  "68 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/watchpack/1.6.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "69 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/webpack-sources/1.4.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/webpack/4.41.1",
+      "name": "webpack-sources",
+      "rawSpec": "webpack-sources@^1.4.1"
+    }
+  },
+  "70 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/webpack-sources/1.4.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "71 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ajv/6.10.2",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/schema-utils/1.0.0",
+      "name": "ajv",
+      "rawSpec": "ajv@6.10.2"
+    }
+  },
+  "72 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ajv-keywords/3.4.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/schema-utils/1.0.0",
+      "name": "ajv-keywords",
+      "rawSpec": "ajv-keywords@3.4.1_ajv@6.10.2"
+    }
+  },
+  "73 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ajv-errors/1.0.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/schema-utils/1.0.0",
+      "name": "ajv-errors",
+      "rawSpec": "ajv-errors@1.0.1_ajv@6.10.2"
+    }
+  },
+  "74 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/wasm-edit/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "75 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/ast/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "76 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/helper-module-context/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "77 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/@webassemblyjs/wasm-parser/1.8.5",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "78 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/acorn/6.3.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "79 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv/6.10.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "80 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/enhanced-resolve/4.1.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "81 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/eslint-scope/4.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "82 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/chrome-trace-event/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "83 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/json-parse-better-errors/1.0.2",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "84 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/loader-runner/2.4.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "85 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/memory-fs/0.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "86 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/mkdirp/0.5.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "87 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/micromatch/3.1.10",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "88 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/loader-utils/1.2.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "89 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/node-libs-browser/2.2.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "90 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/schema-utils/1.0.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "91 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/tapable/1.1.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "92 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/watchpack/1.6.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "93 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/webpack-sources/1.4.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "94 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/neo-async/2.6.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "95 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv-keywords/3.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "96 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv-keywords/3.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "97 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "98 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "99 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv-errors/1.0.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "100 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ajv-errors/1.0.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "101 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/cacache/12.0.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "cacache",
+      "rawSpec": "cacache@^12.0.2"
+    }
+  },
+  "102 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/cacache/12.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "103 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/find-cache-dir/2.1.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "find-cache-dir",
+      "rawSpec": "find-cache-dir@^2.1.0"
+    }
+  },
+  "104 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/find-cache-dir/2.1.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "105 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/schema-utils/1.0.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "schema-utils",
+      "rawSpec": "schema-utils@^1.0.0"
+    }
+  },
+  "106 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/serialize-javascript/1.9.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "serialize-javascript",
+      "rawSpec": "serialize-javascript@^1.7.0"
+    }
+  },
+  "107 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/serialize-javascript/1.9.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "108 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/is-wsl/1.1.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "is-wsl",
+      "rawSpec": "is-wsl@^1.1.0"
+    }
+  },
+  "109 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/is-wsl/1.1.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "110 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/source-map/0.6.1",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "source-map",
+      "rawSpec": "source-map@^0.6.1"
+    }
+  },
+  "111 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/source-map/0.6.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "112 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/terser/4.3.8",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "terser",
+      "rawSpec": "terser@^4.1.2"
+    }
+  },
+  "113 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/terser/4.3.8",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "114 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/webpack-sources/1.4.3",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "webpack-sources",
+      "rawSpec": "webpack-sources@^1.4.0"
+    }
+  },
+  "115 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/worker-farm/1.7.0",
+    "wanted": {
+      "dependentId": "registry.npmjs.org/terser-webpack-plugin/1.4.1",
+      "name": "worker-farm",
+      "rawSpec": "worker-farm@^1.7.0"
+    }
+  },
+  "116 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/worker-farm/1.7.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "resolved"
+  },
+  "117 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/cacache/12.0.3",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "118 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/is-wsl/1.1.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "119 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/find-cache-dir/2.1.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "120 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/serialize-javascript/1.9.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "121 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/source-map/0.6.1",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "122 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/worker-farm/1.7.0",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "123 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/terser/4.3.8",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "124 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/typescript/3.6.4",
+    "requester": "/Users/znck/Workspace/znck/presentation/packages/slides-loader",
+    "status": "found_in_store"
+  },
+  "125 error pnpm": {
+    "message": {
+      "code": "ERR_PNPM_REGISTRY_META_RESPONSE_404",
+      "package": "@types/markdown-it-prism",
+      "response": {
+        "size": 0,
+        "timeout": 0
+      },
+      "uri": "https://registry.npmjs.org/@types%2Fmarkdown-it-prism"
+    },
+    "err": {
+      "name": "Error",
+      "message": "404 Not Found: @types/markdown-it-prism (via https://registry.npmjs.org/@types%2Fmarkdown-it-prism)",
+      "code": "ERR_PNPM_REGISTRY_META_RESPONSE_404",
+      "stack": "Error: 404 Not Found: @types/markdown-it-prism (via https://registry.npmjs.org/@types%2Fmarkdown-it-prism)\n    at fromRegistry (/usr/local/lib/node_modules/pnpm/lib/node_modules/@pnpm/npm-resolver/lib/pickPackage.js:100:15)\n    at processTicksAndRejections (internal/process/task_queues.js:85:5)\n    at async exports.default (/usr/local/lib/node_modules/pnpm/lib/node_modules/@pnpm/npm-resolver/lib/pickPackage.js:63:22)\n    at async resolveNpm (/usr/local/lib/node_modules/pnpm/lib/node_modules/@pnpm/npm-resolver/lib/index.js:87:22)\n    at async Object.resolve (/usr/local/lib/node_modules/pnpm/lib/node_modules/@pnpm/default-resolver/lib/index.js:11:28)\n    at async run (/usr/local/lib/node_modules/pnpm/lib/node_modules/p-queue/dist/index.js:155:29)"
+    }
+  }
+}

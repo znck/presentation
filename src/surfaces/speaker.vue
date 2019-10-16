@@ -21,12 +21,12 @@ export default {
 <template>
   <div :class="$.speaker">
     <div :class="$.currentSlide">
-      <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="0.5">
+      <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="0.35">
         <slot :name="currentSlide" />
       </FitAspectRatio>
     </div>
     <div :class="$.nextSlide" @click.capture.stop="next">
-      <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="0.35">
+      <FitAspectRatio :aspectRatio="aspectRatio" :multiplier="0.25">
         <slot :name="currentSlide + 1" />
       </FitAspectRatio>
     </div>
@@ -42,7 +42,7 @@ export default {
 .speaker {
   display: grid;
   grid-template-columns: 60% 40%;
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 40% 60%;
   grid-column-gap: 16px;
   grid-row-gap: 0px;
   padding: 16px;
@@ -76,6 +76,7 @@ export default {
   background-color: white;
   margin: 0 0 -16px -16px;
   padding: 16px;
+  overflow: auto;
 }
 
 .notes:empty {

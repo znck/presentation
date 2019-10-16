@@ -3,6 +3,8 @@ import { surface, control } from '@/store/helpers';
 import { getSurface } from '@/surfaces';
 
 export default {
+  inheritAttrs: false,
+
   props: {
     aspectRatio: {
       type: Number,
@@ -16,7 +18,10 @@ export default {
 
   provide() {
     return {
-      config: this.$props,
+      config: {
+        ...this.$props,
+        ...this.$attrs,
+      },
     };
   },
 

@@ -38,7 +38,7 @@ export function createChannel(asController: boolean | User['role'] = false) {
 
   const user: User = {
     id,
-    name: 'Anonymous',
+    name: role,
     email: id + '@' + window.location.hostname,
     role: role,
   };
@@ -130,6 +130,8 @@ export function createChannel(asController: boolean | User['role'] = false) {
 
   function setupMediaConnection(connection: Peer.MediaConnection, remoteId: string | null = null) {
     const user: User = connection.metadata;
+
+    user.status = 'online';
 
     if (!user || !user.id) {
       connection.close();
@@ -237,14 +239,14 @@ export function createChannel(asController: boolean | User['role'] = false) {
         connection.send(message);
       });
     },
-    startCall(id: string, stream: MediaStream): Promise<MediaStream> {
+    startCall(id: string, stream: MediaStream, meta: unknown = {}): Promise<MediaStream> {
       return doWhenReadyPromise(() => {
         return new Promise(resolve => {
-          const connection = peer.call(id, stream, { metadata: user });
+          const connection = peer.call(id, stream, { metadata: { ...meta, ...user } });
 
           if (connection) {
             connection.on('stream', stream => resolve(stream));
-            setupMediaConnection(connection);
+            setupMediaConnection(connection, id);
           } else {
             callCallbacks(listeners.onPeerError, new Error('Cannot start call as no stream was provided'));
           }

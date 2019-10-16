@@ -2,9 +2,13 @@ export function hoist(source: string, tagRE = /^(style|script)/) {
   let index = 0;
 
   const hoists: string[] = [];
+  let isCodeBlock = false;
 
   while (index < source.length) {
-    if (source[index] === '<') {
+    if (source[index] === '`' && source.substr(index).startsWith('```')) {
+      index += 2;
+      isCodeBlock = !isCodeBlock;
+    } else if (!isCodeBlock && source[index] === '<') {
       const match = tagRE.exec(source.substr(index + 1));
 
       if (match) {

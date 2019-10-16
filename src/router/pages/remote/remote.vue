@@ -43,6 +43,17 @@ export default {
       await channel.sendMessage(this.serverId, create.request('remote', { secret: this.secret }));
     };
 
+    this.$on(
+      'hook:beforeDestroy',
+      channel.onMessage((user, message) => {
+        if (user.id === this.serverId) {
+          if (is.disconnect(message) && message.payload === 'remote') {
+            this.isConnected = false;
+          }
+        }
+      })
+    );
+
     // Reconnect on connection drop.
     this.$on(
       'hook:beforeDestroy',

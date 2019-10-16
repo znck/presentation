@@ -1,15 +1,29 @@
 <script>
-import { root, streams, users } from "@/store/helpers";
-import { createChannel } from "@/peer";
+import { root, streams, users } from '@/store/helpers';
+import { createChannel } from '@/peer';
 
 const channel = createChannel(false);
+
+function getFromLocalStorage() {
+  const value = localStorage.getItem('info');
+
+  return {
+    name: '',
+    email: '',
+    ...(value ? JSON.parse(value) : null),
+  };
+}
+
+function setFromLocalStorage(payload) {
+  localStorage.setItem('info', JSON.stringify(payload));
+}
 
 export default {
   props: {
     id: String,
   },
   data() {
-    return { name: "", email: "", error: null, status: "disconnected" };
+    return { ...getFromLocalStorage(), error: null, status: 'disconnected' };
   },
   computed: {
     ...streams.computed,
@@ -27,9 +41,11 @@ export default {
     ...root.methods,
     ...streams.methods,
     async connect() {
-      this.status = "connecting";
+      this.status = 'connecting';
       channel.setName(this.name);
       channel.setEmail(this.email);
+
+      setFromLocalStorage({ name: this.name, email: this.email });
 
       await channel.connect(this.id);
     },
@@ -50,9 +66,9 @@ export default {
   watch: {
     server(value) {
       if (!value) {
-        this.status = "disconnected";
+        this.status = 'disconnected';
         this.connect();
-      } else this.status = "connected";
+      } else this.status = 'connected';
     },
     async callFromServer(value, prevValue) {
       if (value) {

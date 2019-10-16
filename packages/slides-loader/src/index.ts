@@ -84,10 +84,12 @@ function render(element: Element | string): string {
 }
 
 function indent(source: string): string {
-  return source
-    .split(/\n/)
-    .map(line => '  ' + line)
-    .join('\n');
+  return source;
+
+  // return '  ' + source
+  //   .split(/\n/)
+  //   .map(line => '  ' + line)
+  //   .join('\n');
 }
 
 function renderAttributes(attrs: Record<string, unknown>): string {

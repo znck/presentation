@@ -20,7 +20,21 @@ const MODULE: Module<State, RootState> = {
   state: () => ({ calls: [] }),
   getters: {
     incomingCalls: state => state.calls.filter(call => call.status === "incoming"),
-    activeCalls: state => state.calls.filter(call => call.status === "connected"),
+    activeCalls: state => {
+      const connecting: Call[] = []
+      const connected: Call[] = []
+      const incoming: Call[] = []
+      
+      state.calls.forEach(call => {
+        switch (call.status) {
+          case 'connecting': connecting.push(call); break;
+          case 'connected': connected.push(call); break;
+          case 'incoming': incoming.push(call); break;
+        }
+      });
+
+      return [...connecting, ...connected, ...incoming]
+    },
   },
   actions: {
     setup({ commit }, _channel: Channel) {
@@ -33,11 +47,11 @@ const MODULE: Module<State, RootState> = {
         delete streams[user.id];
       });
     },
-    async call({ commit }, payload: { user: User; stream: MediaStream }) {
+    async call({ commit }, payload: { user: User; stream: MediaStream, meta?: unknown  }) {
       if (!channel) throw new Error("Setup streams module before calling.");
 
       commit("addCall", { user: payload.user, status: "connecting" });
-      const stream = await channel.startCall(payload.user.id, payload.stream);
+      const stream = await channel.startCall(payload.user.id, payload.stream, payload.meta);
       commit("setCall", { user: payload.user, status: "connected" });
       streams[payload.user.id] = stream;
 
@@ -51,6 +65,12 @@ const MODULE: Module<State, RootState> = {
       streams[payload.user.id] = stream;
 
       return stream;
+    },
+    async endCall({ commit }, payload: { user: User }) {
+      if (!channel) throw new Error("Setup streams module before calling.");
+
+      await channel.endCall(payload.user.id)
+      commit("setCall", { user: payload.user, status: "disconnected" });
     },
     getCallStream({}, id: string) {
       return streams[id];

@@ -31,6 +31,7 @@ export default {
     ...root.methods,
   },
   components: { SyncVuex, QRCode },
+  
   async created() {
     const channel = await this.channel();
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 import deindent from 'de-indent';
 import { hoist } from '../src/utils';
 
@@ -67,5 +68,22 @@ describe('hoist', () => {
         </script>
       `).trim()
     );
+  });
+  
+  test('ignore script block in fenced code block', () => {
+    const { source, hoists } = hoist(
+      deindent(`
+        # some text
+        \`\`\`
+        <script>
+          const foo = '<style></style>';
+        </script>
+        \`\`\`
+
+        ## some more content
+      `)
+    );
+
+    expect(hoists).toHaveLength(0);
   });
 });

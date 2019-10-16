@@ -1,43 +1,136 @@
-<!-- This component connects slideshow clients. -->
-<!-- This component sends remote control actions to admin/server. -->
-
 <script>
-import { root, slideshows } from '@/store/helpers';
-import { is, create } from '@/peer';
-import store from '@/store';
+import { slideshows, root, streams, users } from '@/store/helpers';
+import QRCode from '@/components/QRCode.vue';
+import SyncVuex from '@/store/components/peer-sync-vuex.vue';
 
+let stream = null
 export default {
   props: {
-    target: {
+    id: {
       type: String,
+      required: true,
     },
   },
 
-  methods: {
-    ...root.methods,
+  data() {
+    return {
+      isExpanded: false,
+      secret: null,
+      isSharingStream: false,
+    };
   },
-
   computed: {
     ...slideshows.computed,
+    ...users.computed,
+    slideshowURL() {
+      const id = this.id;
+      const { protocol, hostname, port } = window.location;
+
+      return `${protocol}//${hostname}${port ? ':' + port : ''}/?id=${id}&secret=${this.secret}`;
+    },
   },
+  methods: {
+    ...slideshows.methods,
+    ...root.methods,
+    ...streams.methods,
+    getUser() {
+      const id = this.slideshowId;
+      const user = this.users.find(user => id === user.id);
+
+      return user;
+    },
+    async shareScreen() {
+      const user = this.getUser();
+
+      if (!user) return;
+
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+
+      this.isSharingStream = true;
+
+      stream = await navigator.mediaDevices.getDisplayMedia({ audio: false, video: true });
+
+      await this.call({ user, stream, meta: { streamType: 'fullscreen' } });
+    },
+    async stopSharing() {
+      if (!this.isSharingStream) return;
+      const user = this.getUser();
+
+      if (!user) return;
+
+      await this.endCall({ user });
+      
+      if (stream) { 
+        stream.getTracks().forEach(track => track.stop());
+      }
+      
+      this.prevStream = null;
+      this.isSharingStream = false;
+    },
+  },
+  components: { SyncVuex, QRCode },
 
   async created() {
-    const RE = /^control\/(?:setCurrentSlide)$/;
-    const ch = await this.channel();
+    const channel = await this.channel();
 
-    // Sync local store with remote store.
-    this.$on(
-      'hook:beforeDestroy',
-      store.subscribeAction(action => {
-        if (RE.test(action.type)) {
-          if (this.slideshowId) ch.sendMessage(this.slideshowId, create.vuexAction(action));
-        }
-      })
-    );
-  },
-
-  render(h) {
-    return h(null);
+    this.secret = channel.secret;
   },
 };
 </script>
+
+<template>
+  <div v-if="isExpanded" :class="[$.container, $.expanded]">
+    <!-- TODO: Use click away -->
+    <template v-if="slideshowId">
+      <SyncVuex :to="slideshowId" key="sync" />
+      {{ slideshowId }}
+      <button @click="setActiveSlideshow(null)">disconnect</button>
+      <button @click="shareScreen" v-if="!isSharingStream">share screen</button>
+      <button @click="stopSharing" v-else>stop sharing screen</button>
+    </template>
+
+    <ul v-else>
+      <QRCode :content="slideshowURL" size="30vw" />
+      <pre>{{ slideshowURL }}</pre>
+
+      <li v-for="slideshow in slideshows" :key="slideshow">
+        {{ slideshow.substr(slideshow.length - 4 ) }}
+        <button
+          type="button"
+          @click="setActiveSlideshow(slideshow)"
+        >Allow</button>
+      </li>
+    </ul>
+
+    <button type="button" @click="isExpanded = false">close</button>
+  </div>
+  <div v-else :class="$.container">
+    <template v-if="slideshowId">
+      <SyncVuex :to="slideshowId" key="sync" />
+      <button @click="isExpanded = true">✅</button>
+    </template>
+    <button @click="isExpanded = true" v-else>🖥</button>
+  </div>
+</template>
+
+<style module="$">
+.container {
+  background: white;
+}
+.expanded {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40vw;
+  border-radius: 0;
+}
+
+.container ul {
+  list-style: none;
+  padding-left: 0;
+}
+</style>
+
