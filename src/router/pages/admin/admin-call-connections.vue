@@ -46,25 +46,50 @@ export default {
     <button @click="isExpanded = false">close</button>
   </div>
   <div v-else :class="$.container">
-    <button @click="isExpanded = true">💁‍♀️</button>
+    <button @click="isExpanded = true" :class="$.button" data-icon>
+      <img src="@/assets/users.svg" />
+    </button>
   </div>
 </template>
 
 <style module="$">
 .container {
-  background: white;
+  display: inline-block;
 }
+
 .expanded {
+  display: unset;
+  background: white;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 40vw;
   border-radius: 0;
+  padding: 16px;
 }
 
 .container ul {
   list-style: none;
   padding-left: 0;
+}
+
+.button {
+  border: 1px solid;
+  border-radius: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button img {
+  width: 1.5rem;
 }
 </style>

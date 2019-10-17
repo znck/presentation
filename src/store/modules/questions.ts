@@ -49,7 +49,7 @@ const MODULE: Module<State, RootState> = {
       if (channel) await channel.broadcast(create.questionClose());
     },
   },
-  
+
   mutations: {
     ADD_QUESTION(state, question: Question) {
       const index = state.questions.findIndex(item => item.id === question.id);
@@ -61,8 +61,8 @@ const MODULE: Module<State, RootState> = {
       const question = state.questions.find(question => question.id === id);
 
       if (question) {
-        const userId = answer.user.id;
-        if (!question.answers.find(answer => answer.user.id === userId)) {
+        const userId = answer.user.email;
+        if (question.answers.findIndex(answer => answer.user.email === userId) < 0) {
           question.answers.push(answer);
         }
       }

@@ -1,5 +1,5 @@
 <script>
-import QRCode from "qrcode";
+import QRCode from 'qrcode';
 
 export default {
   props: {
@@ -9,7 +9,7 @@ export default {
     },
     size: {
       type: String,
-      default: "50vw",
+      default: '50vw',
     },
   },
   data: () => ({
@@ -32,5 +32,10 @@ export default {
 </script>
 
 <template>
-  <img v-if="image" :src="image" :style="{ width: size, height: size }" />
+  <img
+    v-if="image"
+    :src="image"
+    :style="{ width: size, height: size }"
+    style="display: block"
+  />
 </template>

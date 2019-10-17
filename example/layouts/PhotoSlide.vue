@@ -27,4 +27,9 @@ export default {
   height: 40vw;
   object-fit: contain;
 }
+
+.photo-slide.wide img {
+  height: 45vw;
+  width: auto;
+}
 </style>

@@ -92,7 +92,7 @@ function indent(source: string): string {
   //   .join('\n');
 }
 
-function renderAttributes(attrs: Record<string, unknown>): string {
+function renderAttributes(attrs: Record<string, unknown> = {}): string {
   const props = Object.entries(attrs);
 
   if (!props.length) return '';

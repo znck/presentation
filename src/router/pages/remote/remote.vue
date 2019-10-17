@@ -33,6 +33,12 @@ export default {
     ...surface.methods,
   },
 
+  computed: {
+    zoom() {
+      return Math.min(400, window.innerWidth) / window.innerWidth;
+    },
+  },
+
   async created() {
     this.setSurface('preview'); // displays current slide in <Presentation> component.
 
@@ -108,14 +114,14 @@ export default {
 
 <template>
   <div :class="$.remote">
-    <template v-if="isConnected">
-      <SyncVuex :from="serverId" :to="serverId" />
-      <div :class="$.container">
+    <div :class="$.container" :style="{ transform: `scale(${zoom})`, height: `${100/zoom}vh` }">
+      <template v-if="isConnected">
+        <SyncVuex :from="serverId" :to="serverId" />
         <Presentation />
         <Controls />
-      </div>
-    </template>
-    <WaitScreen v-else :remoteId="deviceId" />
+      </template>
+      <WaitScreen v-else :remoteId="deviceId" />
+    </div>
   </div>
 </template>
 
@@ -129,26 +135,17 @@ body {
 .remote {
   height: 100%;
   width: 100vw;
+  max-width: 400px;
   background-color: black;
   touch-action: manipulation;
   -webkit-touch-callout: none !important;
   -webkit-user-select: none;
   user-select: none;
+  overflow: hidden;
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 1fr 2fr;
-  padding: 16px;
-  max-height: 100%;
-}
-
-.container > *:nth-of-type(1) {
-  grid-area: 1/1/2/2;
-}
-
-.container > *:nth-of-type(2) {
-  grid-area: 2/1/3/2;
+  width: 100vw;
+  transform-origin: top left;
 }
 </style>

@@ -3,8 +3,12 @@ import store from '@/store';
 import router from '@/router';
 import QRCode from '@/components/QRCode.vue';
 import User from '@/components/User.vue';
+import FencedCode from '@/components/FencedCode.vue';
 import SlidesContainer from '@/store/components/SlidesContainer.vue';
 import Question from '@/store/components/Question.vue';
+
+import 'prismjs/themes/prism-solarizedlight.css'
+import './style.css';
 
 export async function createApp(Presentation: any) {
   Vue.config.keyCodes.plus = 43;
@@ -15,6 +19,7 @@ export async function createApp(Presentation: any) {
   Vue.component('Presentation', Presentation);
   Vue.component('QRCode', QRCode);
   Vue.component('Question', Question);
+  Vue.component('FencedCode', FencedCode);
   Vue.component('User', User);
   Vue.component('Notes', {
     functional: true,

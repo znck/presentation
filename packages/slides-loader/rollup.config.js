@@ -10,5 +10,5 @@ export default {
     format: 'cjs',
   },
   plugins: [ts({ tsconfig: 'tsconfig.build.json' })],
-  external: ['front-matter', 'markdown-it', 'markdown-it-prism']
+  external: ['front-matter', '@vuepress/markdown', 'fs']
 };

@@ -60,4 +60,19 @@ export default {
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
   font-weight: bold;
 }
+
+.container button {
+  border: 1px solid;
+  background: white;
+  color: black;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.container button:focus {
+  outline: none;
+}
+.container button:not([data-icon]):active {
+  background: black;
+  color: white;
+}
 </style>

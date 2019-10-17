@@ -76,4 +76,19 @@ export default {
   right: 0;
   padding: 16px;
 }
+
+.controls button {
+  border: 1px solid;
+  background: white;
+  color: black;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.controls button:focus {
+  outline: none;
+}
+.controls button:not([data-icon]):active {
+  background: black;
+  color: white;
+}
 </style>

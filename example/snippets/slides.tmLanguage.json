@@ -1,0 +1,12 @@
+{
+  "name": "slides",
+  "scopeName": "source.slides",
+  "patterns": [{ "include": "#slide" }],
+  "repository": {
+    "slide": {
+      "begin": "<!-- slide *-->",
+      "end": "(?=<!-- slide *-->|\\z)",
+      "patterns": [{ "include": "text.html.markdown" }]
+    }
+  }
+}

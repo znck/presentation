@@ -13,7 +13,6 @@ export default {
     },
     options: {
       type: Array,
-      required: true,
     },
   },
   inject: ['slideIndex'],
@@ -27,6 +26,7 @@ export default {
     results() {
       const slideId = this.currentSlide;
       const isRating = this.type === 'rating';
+      const isVote = this.type === 'vote';
       const question = this.questions.find(question => question.id === slideId);
 
       if (isRating) {
@@ -41,7 +41,7 @@ export default {
         }
 
         return result;
-      } else {
+      } else if (isVote) {
         const results = {};
 
         this.options.forEach(option => {
@@ -66,10 +66,6 @@ export default {
     currentSlide: {
       immediate: true,
       async handler(currentSlide) {
-        console.log({
-          currentSlide,
-          slide: this.slideIndex,
-        });
         if (this.slideIndex === currentSlide) {
           const channel = await this.channel();
           const questionId = this.slideIndex;
@@ -95,9 +91,9 @@ export default {
 <template>
   <div>
     <h3>{{ text }}</h3>
-    <div v-if="type === 'vote'">
-      <div v-for="(value, option) in results" :key="option">
-        <h4>{{ value }} {{ option }}</h4>
+    <div v-if="type === 'vote'" :class="$.options">
+      <div v-for="(value, option) in results" :key="option" :class="$.option">
+        <h4><span :class="$.votes">{{ value }}</span> {{ option }}</h4>
       </div>
     </div>
     <div v-else-if="type === 'rating'">
@@ -105,3 +101,30 @@ export default {
     </div>
   </div>
 </template>
+
+<style module="$">
+.options {
+  display: flex;
+  margin: 2vw;
+  border: 0.25vw solid;
+}
+
+.option {
+  padding: 1vw;
+}
+
+.option:not(:first-child) {
+  border-left: 0.25vw solid;
+}
+
+.votes {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 1.2em;
+  background: black;
+  color: white;
+}
+</style>

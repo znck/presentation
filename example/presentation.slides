@@ -58,7 +58,7 @@ function HelloWorld() {
 
 <!-- slide: Example/Demo — Line Highlight Code -->
 
-```js 2
+```js{2}
 function HelloWorld() {
   console.log('Code as it should be');
 }
@@ -121,26 +121,19 @@ layout: PhotoSlide
 - To program and extend
 
 <!-- slide: Basic Presentation Framework -->
+<<<@/example/snippets/basic-framework.vue
+##### `slides.vue`
 
-```vue 
-<template>
-  <div 
-    @keydown.arrow-right="current += 1"
-    @keydown.arrow-left="current -= 1"
-  >
-    <slot :name="current"></slot>
-  </div>
-</template>
+<!-- slide: Basic Presentation Framework -->
+<<<@/example/snippets/basic-framework.vue{6}
+##### `slides.vue`
 
-<script>
-export default {
-  data: () => ({
-    current: 0,
-  }),
-}
-</script>
-```
+<!-- slide: Basic Presentation Framework -->
+<<<@/example/snippets/basic-framework.vue{6,12-14}
+##### `slides.vue`
 
+<!-- slide: Basic Presentation Framework -->
+<<<@/example/snippets/basic-framework.vue{12-14,3-4}
 ##### `slides.vue`
 
 
@@ -155,29 +148,13 @@ export default {
   </Slides>
 </template>
 ```
-
 ##### `presentation.vue`
 
-<!-- slide: Demo of Basic Presentation Framework -->
-
-<BasicUsage />
-
-<!-- slide: Overiew Mode in Basic Presentation Framework -->
-
-```vue 
-<template>
-  <div>
-    <slot 
-      v-for="slide in totalSlides" 
-      :name="slide"
-    ></slot>
-  </div>
-</template>
-```
-
-##### `overview.vue`
-
 <!-- slide: Using Basic Presentation Framework -->
+---
+layout: TwoColumn
+---
+<div>
 
 ```vue
 <template>
@@ -188,8 +165,54 @@ export default {
   </Overview>
 </template>
 ```
-
 ##### `presentation.vue`
+
+</div>
+
+<div>
+
+```jsx
+<Overview>
+  {{
+    0: () => 'Slide 1',
+    1: () => 'Slide 2',
+    2: () => 'Slide 3',
+  }}
+</Overview>
+```
+##### `presentation.jsx`
+
+</div>
+
+<!-- slide: Demo of Basic Presentation Framework -->
+
+<BasicUsage />
+
+<!-- slide: Overiew Mode in Basic Presentation Framework -->
+```vue 
+<template>
+  <div>
+    <slot 
+      v-for="slide in totalSlides" 
+      :name="slide"
+    />
+  </div>
+</template>
+```
+##### `overview.vue`
+
+<!-- slide: Overiew Mode in Basic Presentation Framework -->
+```vue {3-6}
+<template>
+  <div>
+    <slot 
+      v-for="slide in totalSlides" 
+      :name="slide"
+    />
+  </div>
+</template>
+```
+##### `overview.vue`
 
 <!-- slide: Demo Basic Overview Mode -->
 
@@ -210,6 +233,7 @@ export default {
   </Overview>
 </template>
 ```
+##### `presentation.vue`
 
 <!-- slide: Template API -->
 
@@ -220,14 +244,12 @@ export default {
       <Slide>
         <h1>The best presentation framework</h1>
       </Slide>
-    </template>
-    
+    </template>   
     <template #1>
       <Slide>
         <h1>PowerPoint is not for programmers</h1>
       </Slide>
     </template>
-    
     <template #1>
       <Slide>
         <h1>Keynote is a compromise</h1>
@@ -351,22 +373,7 @@ const sfc = `
 
 <!-- slide: Converting Markdown to SFC -->
 ```js
-const sources = source.split('<!-- slide *-->')
-const slides = sources.map(currentSource => {
-  return md.render(currentSource);
-})
-const sfc = `
-<template>
-  ${slides.map((slide, index) => (
-    `<template #${index}}>${slide}</template>`
-  )).join('\n')}
-</template>
-`
-```
-
-<!-- slide: Converting Markdown to SFC -->
-```js
-const md = require('markdown-it')();
+const md = require('@vuepress/markdown')();
 
 module.exports = function SlidesLoader(source) {
   const sources = source.split('<!-- slide *-->')
@@ -383,26 +390,47 @@ module.exports = function SlidesLoader(source) {
   return sfc;
 }
 ```
+##### `slides-loader.js`
 
+<!-- slide: Converting Markdown to SFC -->
+```js{1-3,15-16}
+const md = require('@vuepress/markdown')();
+
+module.exports = function SlidesLoader(source) {
+  const sources = source.split('<!-- slide *-->')
+  const slides = sources.map(currentSource => {
+    return md.render(currentSource);
+  })
+  const sfc = `
+  <template>
+    ${slides.map((slide, index) => (
+      `<template #${index}}>${slide}</template>`
+    )).join('\n')}
+  </template>
+  `
+  return sfc;
+}
+```
 ##### `slides-loader.js`
 
 <!-- slide: Using the loader -->
+<<<@/example/snippets/vue.config.js
+##### `vue.config.js`
 
-```js
-module.exports = {
-  chainWebpack(config) {
-    config.module.rule('slides')
-      .test(/\.slides$/)
-      .use('vue-loader')
-        .loader('vue-loader')
-        .end()
-      .use('slides-loader')
-        .loader(require.resolve('./slides-loader'))
-        .end()
-  }
-}
-```
+<!-- slide: Using the loader -->
+<<<@/example/snippets/vue.config.js{3}
+##### `vue.config.js`
 
+<!-- slide: Using the loader -->
+<<<@/example/snippets/vue.config.js{4}
+##### `vue.config.js`
+
+<!-- slide: Using the loader -->
+<<<@/example/snippets/vue.config.js{8-10}
+##### `vue.config.js`
+
+<!-- slide: Using the loader -->
+<<<@/example/snippets/vue.config.js{5-7}
 ##### `vue.config.js`
 
 <!-- slide: Slide separator for Markdown API -->
@@ -423,10 +451,9 @@ module.exports = {
 
 <!-- slide: Create vue app -->
 
-```js
+```js{2}
 import Vue from 'vue'
 import App from './presentation.slides'
-
 new Vue(App).$mount('#app')
 ```
 
@@ -449,46 +476,56 @@ class: window-screenshot
 ## We have to tell __VS Code__, "What is `.slides`?"
 
 <!-- slide: Language Extension -->
+<<<@/example/snippets/package-extension.json
+##### `package.json`
 
-```json
-{
-  "name": "vscode-slides-language",
-  "version": "1.0.0",
-  "engines": { "vscode": "^1.32.0" },
-  "categories": [ "Programming Languages" ],
-  "contributes": {
-    "languages": [
-      { "id": "slides", "extensions": [".slides" ] }
-    ],
-    "grammars": [{
-      "language": "slides",
-      "scopeName": "source.slides",
-      "path": "./slides.tmLanguage.json"
-    }]
-  }
-}
-```
+<!-- slide: Language Extension -->
+<<<@/example/snippets/package-extension.json{2-5}
+##### `package.json`
 
+<!-- slide: Language Extension -->
+<<<@/example/snippets/package-extension.json{6}
+##### `package.json`
+
+<!-- slide: Language Extension -->
+<<<@/example/snippets/package-extension.json{7}
+##### `package.json`
+
+<!-- slide: Language Extension -->
+<<<@/example/snippets/package-extension.json{8-14}
 ##### `package.json`
 
 <!-- slide: .slides Language Grammar -->
-
-```json
-{
-  "name": "slides",
-  "scopeName": "source.slides",
-  "patterns": [{ "include": "#slide" }],
-  "repository": {
-    "slide": {
-      "begin": "<!-- slide *-->",
-      "end": "(?=<!-- slide *-->|\\z)",
-      "patterns": [{ "include": "text.html.markdown" }]
-    }
-  }
-}
-```
-
+<<<@/example/snippets/slides.tmLanguage.json
 ##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{2-3}
+##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{4}
+##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{5-11}
+##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{7}
+##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{8}
+##### `slides.tmLanguage.json`
+
+<!-- slide: .slides Language Grammar -->
+<<<@/example/snippets/slides.tmLanguage.json{9}
+##### `slides.tmLanguage.json`
+
+
+<!-- slide: Publish VS Code Extension -->
+### https://code.visualstudio.com __/api/working-with-extensions/publishing-extension__
 
 <!-- slide: In VS Code as Slides -->
 ---
@@ -498,77 +535,97 @@ class: window-screenshot
 ![presentation.slides opened in VS Code](./assets/slides-as-slides.png)
 
 <!-- slide: Language Extension / Code Folding -->
-
-```json
-{
-  "name": "vscode-slides-language",
-  "version": "1.0.0",
-  "engines": { "vscode": "^1.32.0" },
-  "categories": [ "Programming Languages" ],
-  "contributes": {
-    "languages": [
-      { "id": "slides", "extensions": [".slides" ] }
-    ],
-    "grammars": [{
-      "language": "slides",
-      "scopeName": "source.slides",
-      "path": "./slides.tmLanguage.json"
-    }]
-  },
-  "activationEvents": [
-    "onLanguage:slides"
-  ],
-  "main": "extension.js"
-}
-```
-
+---
+class: slide-le-code-folding
+---
+<<<@/example/snippets/package-folding.json{16}
 ##### `package.json`
 
+<!-- slide: Language Extension / Code Folding -->
+---
+class: slide-le-code-folding
+---
+<<<@/example/snippets/package-folding.json{17}
+##### `package.json`
 
 <!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js
+##### `extension.js`
 
-```js
-const vscode = require('vscode');
-const slideFoldingRangeProvider = require('./provider')
+<!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js{4}
+##### `extension.js`
 
-module.exports = { activate };
+<!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js{6-13}
+##### `extension.js`
 
-function activate() {
-  const selector = { language: 'slides' };
-  
-  vscode.languages.registerFoldingRangeProvider(
-    selector,
-    slideFoldingRangeProvider
-  );
-}
-```
+<!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js{9-12}
+##### `extension.js`
 
+<!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js{7}
+##### `extension.js`
+
+<!-- slide: Language Extension / Code Folding Implementation -->
+<<<@/example/snippets/extension.js{2}
 ##### `extension.js`
 
 <!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js
+##### `provider.js`
 
-```js
-const vscode = require('vscode');
-module.exports = {
-  provideFoldingRanges(file) {
-    const source = file.getText();
-    const lines = source.split('\n');
-    const folds = [];
-    let start = 0;
-    lines.forEach((line, index) => {
-      if (line === '<!-- slide *-->') {
-        folds.push(new vscode.FoldingRange(
-          start, index - 1, 
-          vscode.FoldingRangeKind.Region
-        ));
-        start = index;
-      }
-    });
-    return folds;
-  }
-};
-```
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{2-3}
+##### `provider.js`
 
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{4}
+##### `provider.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{4-5}
+##### `provider.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{8}
+##### `provider.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{9}
+##### `provider.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{10-12}
+##### `provider.js`
+
+<!-- slide: Language Extension / Code Folding Implementation (Provider) -->
+---
+class: slide-le-provider
+---
+<<<@/example/snippets/provider.js{16}
 ##### `provider.js`
 
 <!-- slide: In VS Code as Slides with code folding -->
@@ -595,8 +652,13 @@ class: window-screenshot
 - To program and extend
 
 <!-- slide: Demo code presentation -->
+---
+layout: TwoColumn
+class: slide-template-to-markdown
+---
+<<<@/example/snippets/presentation-code.md
 
-```js 2
+```js{2}
 function HelloWorld() {
   console.log('Code as it should be');
 }
@@ -611,14 +673,14 @@ function HelloWorld() {
 - To use familiar tools
 - To program and extend
 
-<!-- slide: Demo embed - Source -->
-
+<!-- slide: Demo embed -->
+---
+layout: TwoColumn
+---
 ```md
 <!-- slide *-->
 <Counter />
 ```
-
-<!-- slide: Demo embed -->
 
 <Counter />
 
@@ -662,6 +724,10 @@ function HelloWorld() {
 - ~~To use familiar tools~~
 - ~~To program and extend~~
 
+
+<!-- slide: Do Anything -->
+# Do Anything
+
 <!-- slide: Join the presentation -->
 
 <JoinThePresentation />
@@ -684,6 +750,33 @@ function HelloWorld() {
   text="What next?" 
   :options="['Demo', 'How it works?']"
 />
+
+
+<!-- slide: Magic -->
+---
+layout: PhotoSlide
+wide: true
+---
+![Magic](./assets/magic.png)
+
+
+<!-- slide: Web RTC -->
+---
+layout: PhotoSlide
+wide: true
+---
+![Can I use Web RTC?](./assets/caniuse-web-rtc.png)
+
+<!-- slide: Presentation API -->
+---
+layout: PhotoSlide
+wide: true
+---
+![Can I use Presentation API?](./assets/caniuse-presentation-api.png)
+
+
+<!-- slide: Questions -->
+<Question type="live" text="Questions?" />
 
 <!-- slide: About -->
 
@@ -742,6 +835,10 @@ h4 {
   font-size: 4vw;
 }
 
+h5 {
+  font-size: 1.5vw;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -751,8 +848,9 @@ p, ul {
   font-size: 3vw;
 }
 
-pre {
+div[class*="language-"] {
   font-size: 2vw;
+  margin-bottom: 1vw;
 }
 
 ul, pre {
@@ -779,11 +877,19 @@ strong, em, .cp {
   font-size: 2vw;
 }
 
-.slide-template-to-markdown pre {
-  font-size: 1.75vw;
+.slide-template-to-markdown div[class*="language-"] {
+  font-size: 1.5vw;
 }
 
 .window-screenshot img {
   height: 50vw;
+}
+
+.slide-le-code-folding div[class*="language-"] {
+  margin-top: -10vw;
+}
+
+.slide-le-provider div[class*="language-"] {
+  margin-top: -6vw;
 }
 </style>

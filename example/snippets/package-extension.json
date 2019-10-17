@@ -1,0 +1,16 @@
+{
+  "name": "vscode-slides-language",
+  "version": "1.0.0",
+  "engines": { "vscode": "^1.32.0" },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{ "id": "slides", "extensions": [".slides"] }],
+    "grammars": [
+      {
+        "language": "slides",
+        "scopeName": "source.slides",
+        "path": "./slides.tmLanguage.json"
+      }
+    ]
+  }
+}
