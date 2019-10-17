@@ -2,3 +2,6 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build]
+  ignore = "git diff --quiet HEAD^ HEAD sub_dir/"
