@@ -4,6 +4,7 @@
   "description": "",
   "author": "Rahul Kadyan <rahulkdn@gmail.com> (https://znck.dev/)",
   "scripts": {
+    "postinstall": "cd packages/slides-loader && npm install",
     "test": "npm run test:unit",
     "serve": "vue-cli-service serve --https example/main.js",
     "build": "vue-cli-service build example/main.js",
