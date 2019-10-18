@@ -212,8 +212,11 @@ export function createChannel(asController: boolean | User['role'] = false) {
 
           setupDataConnection(connection, false);
 
+          let done = false;
           connection.on('data', data => {
+            if (done) return;
             if (is.identity(data)) {
+              done = true;
               resolve(data.payload);
             }
           });

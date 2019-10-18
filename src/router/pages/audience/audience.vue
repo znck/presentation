@@ -32,7 +32,7 @@ export default {
     server() {
       const id = this.id;
 
-      return this.onlineUsers.find(user => user.id === id);
+      return this.users.find(user => user.id === id);
     },
     callFromServer() {
       return this.incomingCalls.find(call => call.user.id === this.id);

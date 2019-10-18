@@ -735,6 +735,11 @@ wide: true
 
 ### Rahul Kadyan
 
+<br />
+<br />
+
+[github.com/znck/presentation](https://github.com/znck/presentation)
+
 <!-- slide: Fin. -->
 
 <script>
@@ -842,5 +847,9 @@ strong, em, .cp {
 
 .slide-le-provider div[class*="language-"] {
   margin-top: -6vw;
+}
+
+a, a:visited {
+  color: inherit;
 }
 </style>
