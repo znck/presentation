@@ -5,6 +5,21 @@ import BrownianMotion from './brownian-motion.vue';
 export default {
   computed: {
     ...mapGetters('users', { users: 'onlineUsers' }),
+    // users() {
+    //   const users = []
+
+    //   for (let i = 0; i < 50; ++i) {
+    //     users.push({
+    //       id: `${i}`,
+    //       name: `User ${i}`,
+    //       email: `user${i}@example.com`,
+    //       role: 'audience',
+    //       status: 'online'
+    //     })
+    //   }
+
+    //   return users;
+    // },
     ...mapState(['serverId']),
     url() {
       const { protocol, hostname, port } = window.location;
@@ -22,7 +37,7 @@ export default {
     <p>Scan &amp; Join the presentation!</p>
 
     <BrownianMotion v-for="user of users" :key="user.id">
-      <User v-bind="user" />
+      <User v-bind="user" hide />
     </BrownianMotion>
   </div>
 </template>

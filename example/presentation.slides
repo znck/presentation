@@ -149,41 +149,6 @@ layout: PhotoSlide
 </template>
 ```
 ##### `presentation.vue`
-
-<!-- slide: Using Basic Presentation Framework -->
----
-layout: TwoColumn
----
-<div>
-
-```vue
-<template>
-  <Overview>
-    <template #0>Slide 1</template>
-    <template #1>Slide 2</template>
-    <template #2>Slide 3</template>
-  </Overview>
-</template>
-```
-##### `presentation.vue`
-
-</div>
-
-<div>
-
-```jsx
-<Overview>
-  {{
-    0: () => 'Slide 1',
-    1: () => 'Slide 2',
-    2: () => 'Slide 3',
-  }}
-</Overview>
-```
-##### `presentation.jsx`
-
-</div>
-
 <!-- slide: Demo of Basic Presentation Framework -->
 
 <BasicUsage />
@@ -744,21 +709,18 @@ layout: TwoColumn
 </notes>
 
 <!-- slide: Ask a question? -->
-
 <Question 
   type="vote" 
-  text="What next?" 
-  :options="['Demo', 'How it works?']"
+  text="So, did you like it?" 
+  :options="['Nop', 'Yep', 'Kinda']"
 />
 
-
-<!-- slide: Magic -->
----
-layout: PhotoSlide
-wide: true
----
-![Magic](./assets/magic.png)
-
+<!-- slide: Ask a question? -->
+<Question 
+  type="vote" 
+  text="So, did you like it?" 
+  :options="['Nop', 'Yep']"
+/>
 
 <!-- slide: Web RTC -->
 ---
@@ -766,17 +728,6 @@ layout: PhotoSlide
 wide: true
 ---
 ![Can I use Web RTC?](./assets/caniuse-web-rtc.png)
-
-<!-- slide: Presentation API -->
----
-layout: PhotoSlide
-wide: true
----
-![Can I use Presentation API?](./assets/caniuse-presentation-api.png)
-
-
-<!-- slide: Questions -->
-<Question type="live" text="Questions?" />
 
 <!-- slide: About -->
 

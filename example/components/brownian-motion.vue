@@ -1,9 +1,27 @@
 <script>
+const box = [0.35, 0.615, 0.21, 0.68];
+
+function inBox({ x, y }) {
+  return box[0] <= x && x <= box[1] && box[2] <= y && y <= box[3];
+}
+
+function inX(x) {
+  return box[0] <= x && x <= box[1];
+}
+
+function inY(y) {
+  return box[2] <= y && y <= box[3];
+}
+
+function random(a, b) {
+  return Math.random() * (b - a) + a;
+}
+
 export default {
   data: () => ({
-    x: Math.random(),
-    y: Math.random(),
-    speed: [0.0001 * Math.random() , 0.0001 * Math.random()]
+    x: 0.5,
+    y: 1,
+    speed: [random(-10, 10), random(-10, 10)].map(v => v * 0.00001),
   }),
   mounted() {
     let t = Date.now();
@@ -14,11 +32,22 @@ export default {
       const nextX = this.x + this.speed[0] * dT;
       const nextY = this.y + this.speed[1] * dT;
 
-      if (nextX >= 1 || nextX <= 0 || (nextX > 0.32 && nextX < 0.72)) {
+      if (nextX >= 1 || nextX <= 0) {
         this.speed[0] = -this.speed[0];
       }
 
-      if (nextY >= 1 || nextY <= 0 || (nextX > 0.25 && nextX < 0.75)) {
+      if (inBox({ x: nextX, y: nextY })) {
+        if (inX(this.x)) {
+          this.speed[1] = -this.speed[1];
+        } else if (inY(this.y)) {
+          this.speed[0] = -this.speed[0];
+        } else {
+          this.speed[1] = -this.speed[1];
+          this.speed[0] = -this.speed[0];
+        }
+      }
+
+      if (nextY >= 1 || nextY <= 0) {
         this.speed[1] = -this.speed[1];
       }
 

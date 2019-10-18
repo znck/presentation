@@ -69,7 +69,7 @@ div[class*='language-'] .highlight-lines {
   top: 0;
   left: 0;
   width: 100%;
-  line-height: 1.45;
+  line-height: 1.47;
 }
 
 div[class*='language-'] .highlight-lines > div {
@@ -113,7 +113,7 @@ div[class*='language-'].line-numbers-mode .highlight-lines > div:before {
   position: absolute;
   z-index: 3;
   left: 0;
-  height: 1.45em;
+  height: 1.47em;
   display: block;
   width: 3.5vw;
   background-color: var(--highlight-overlay);

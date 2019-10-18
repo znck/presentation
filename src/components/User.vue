@@ -82,21 +82,21 @@ function MD5(string) {
   }
 
   function WordToHex(lValue) {
-    var WordToHexValue = "",
-      WordToHexValue_temp = "",
+    var WordToHexValue = '',
+      WordToHexValue_temp = '',
       lByte,
       lCount;
     for (lCount = 0; lCount <= 3; lCount++) {
       lByte = (lValue >>> (lCount * 8)) & 255;
-      WordToHexValue_temp = "0" + lByte.toString(16);
+      WordToHexValue_temp = '0' + lByte.toString(16);
       WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
     }
     return WordToHexValue;
   }
 
   function Utf8Encode(string) {
-    string = string.replace(/\r\n/g, "\n");
-    var utftext = "";
+    string = string.replace(/\r\n/g, '\n');
+    var utftext = '';
 
     for (var n = 0; n < string.length; n++) {
       var c = string.charCodeAt(n);
@@ -230,6 +230,7 @@ export default {
     email: { type: String, required: true },
     name: { type: String, required: true },
     status: String,
+    hide: Boolean,
   },
   computed: {
     photo() {
@@ -244,10 +245,10 @@ export default {
 
 <template>
   <div :class="$.user">
-    <div :class="[$.photo, status === 'online' ? $.online : $.offline ]">
+    <div :class="[$.photo, hide ? null : status === 'online' ? $.online : $.offline ]">
       <img :src="photo" :alt="name" />
     </div>
-    <div :class="$.name">
+    <div :class="$.name" v-if="!hide">
       {{ name }}
       <br />
       <slot />
@@ -267,17 +268,20 @@ export default {
   margin-right: 16px;
 }
 
+.photo:last-child {
+  margin: 0;
+}
+
 .photo img {
   border-radius: 54px;
 }
 
 .photo:after {
-  content: "";
+  content: '';
   --size: 12px;
   border-radius: var(--size);
   height: var(--size);
   width: var(--size);
-  background: darkred;
   position: absolute;
   top: 40px;
   left: 40px;
@@ -285,5 +289,9 @@ export default {
 
 .photo.online::after {
   background: darkgreen;
+}
+
+.photo.offline::after {
+  background: darkred;
 }
 </style>
