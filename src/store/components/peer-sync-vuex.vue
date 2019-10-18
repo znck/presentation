@@ -20,9 +20,10 @@ export default {
     this.$on(
       'hook:beforeDestroy',
       channel.onMessage(async (user, message) => {
-        if (user.id === this.from) {
+        if (this.from && user.id === this.from) {
           if (is.vuexAction(message)) {
             const action = message.payload;
+
             isSyncing = true;
             await store.dispatch(action.type, action.payload);
             isSyncing = false;
@@ -34,11 +35,10 @@ export default {
     this.$on(
       'hook:beforeDestroy',
       store.subscribeAction(action => {
-        if (this.filter.test(action.type)) {
-          if (!isSyncing) channel.sendMessage(this.to, create.vuexAction(action));
-          else console.log('Already syncing', action)
-        } else {
-          console.log('Ignore', action)
+        if (this.to) {
+          if (this.filter.test(action.type)) {
+            if (!isSyncing) channel.sendMessage(this.to, create.vuexAction(action));
+          }
         }
       })
     );
