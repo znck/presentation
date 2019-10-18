@@ -711,15 +711,22 @@ layout: TwoColumn
 <!-- slide: Ask a question? -->
 <Question 
   type="vote" 
-  text="Have you ever thrown something at the TV?" 
-  :options="['Yes and it was fun.', 'Yes and I broke it. :(', 'No, I\'m a cool cat.']"
+  text="Would you rather fight 10 duck-sized horses, or 1 horse-sized duck?" 
+  :options="['10 duck-sized horses', '1 horse-sized duck']"
 />
 
 <!-- slide: Ask a question? -->
 <Question 
   type="vote" 
-  text="Dogs or Cats?" 
-  :options="['Cats', 'Dogs', 'Both', 'None']"
+  text="Would you rather speak all languages or speak to animals?" 
+  :options="['All languages', 'Speak to animals']"
+/>
+
+<!-- slide: Ask a question? -->
+<Question 
+  type="vote" 
+  text="Which flavor of ice cream best represents you?" 
+  :options="['Chocolate', 'Vanilla', 'Mint', 'Strawberry']"
 />
 
 <!-- slide: Ask a question? -->
