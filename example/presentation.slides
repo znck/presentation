@@ -711,15 +711,22 @@ layout: TwoColumn
 <!-- slide: Ask a question? -->
 <Question 
   type="vote" 
-  text="So, did you like it?" 
-  :options="['Nop', 'Yep', 'Kinda']"
+  text="Have you ever thrown something at the TV?" 
+  :options="['Yes and it was fun.', 'Yes and I broke it. :(', 'No, I\'m a cool cat.']"
 />
 
 <!-- slide: Ask a question? -->
 <Question 
   type="vote" 
-  text="So, did you like it?" 
-  :options="['Nop', 'Yep', 'Kinda']"
+  text="Dogs or Cats?" 
+  :options="['Cats', 'Dogs', 'Both', 'None']"
+/>
+
+<!-- slide: Ask a question? -->
+<Question 
+  type="vote" 
+  text="How am I doing?" 
+  :options="['Going great!', '¯\\_(ツ)_/¯']"
 />
 
 <!-- slide: Web RTC -->
