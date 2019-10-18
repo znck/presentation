@@ -135,7 +135,7 @@ body {
 .remote {
   height: 100%;
   width: 100vw;
-  max-width: 400px;
+  max-width: 480px;
   background-color: black;
   touch-action: manipulation;
   -webkit-touch-callout: none !important;
