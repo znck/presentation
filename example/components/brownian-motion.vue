@@ -1,5 +1,5 @@
 <script>
-const box = [0.35, 0.615, 0.21, 0.68];
+const box = [0.35, 0.615, 0.19, 0.68];
 
 function inBox({ x, y }) {
   return box[0] <= x && x <= box[1] && box[2] <= y && y <= box[3];
