@@ -69,7 +69,7 @@ div[class*='language-'] .highlight-lines {
   top: 0;
   left: 0;
   width: 100%;
-  line-height: 1.47;
+  line-height: 1.45;
 }
 
 div[class*='language-'] .highlight-lines > div {
