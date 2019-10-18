@@ -20,7 +20,7 @@ function random(a, b) {
 export default {
   data: () => ({
     x: 0.5,
-    y: 1,
+    y: 0,
     speed: [random(-10, 10), random(-10, 10)].map(v => v * 0.00001),
   }),
   mounted() {
