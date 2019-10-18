@@ -42,7 +42,9 @@ export default {
     </div>
     <slot />
     <div class="line-numbers-wrapper" v-once>
-      <div class="line-number" v-for="line in loc - 1" :key="line">{{ line }}</div>
+      <div class="line-number" v-for="line in loc - 1" :key="line">
+        <span>{{ line }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -69,7 +71,7 @@ div[class*='language-'] .highlight-lines {
   top: 0;
   left: 0;
   width: 100%;
-  line-height: 1.45;
+  line-height: 1.42;
 }
 
 div[class*='language-'] .highlight-lines > div {
@@ -113,7 +115,7 @@ div[class*='language-'].line-numbers-mode .highlight-lines > div:before {
   position: absolute;
   z-index: 3;
   left: 0;
-  height: 1.47em;
+  height: 1.41em;
   display: block;
   width: 3.5vw;
   background-color: var(--highlight-overlay);
@@ -146,9 +148,11 @@ div[class*='language-'].line-numbers-mode .line-numbers-wrapper br {
 div[class*='language-'].line-numbers-mode .line-numbers-wrapper .line-number {
   position: relative;
   z-index: 4;
-  font-size: 0.75em;
-  line-height: 1.87;
-  padding-top: 0.1em;
+  height: 1.41em;
+}
+
+.line-number > span {
+  font-size: 0.7em;
 }
 
 div[class*='language-'].line-numbers-mode:after {
