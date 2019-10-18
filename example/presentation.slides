@@ -714,14 +714,6 @@ layout: TwoColumn
   text="So, did you like it?" 
   :options="['Nop', 'Yep', 'Kinda']"
 />
-
-<!-- slide: Ask a question? -->
-<Question 
-  type="vote" 
-  text="So, did you like it?" 
-  :options="['Nop', 'Yep']"
-/>
-
 <!-- slide: Web RTC -->
 ---
 layout: PhotoSlide

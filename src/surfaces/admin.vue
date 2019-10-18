@@ -3,7 +3,7 @@ import { control } from '@/store/helpers';
 import FitAspectRatio from '@/components/FitAspectRatio.vue';
 import Timer from '@/components/Timer.vue';
 import ProvideSlideIndex from '@/components/ProvideSlideIndex.vue';
-import KeyboardNavigation from '@/store/components/KeyboardNavigation';
+import KeyboardNavigation from '@/store/components/KeyboardNavigation.vue';
 
 export default {
   props: {

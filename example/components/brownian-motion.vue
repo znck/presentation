@@ -32,7 +32,7 @@ export default {
       const nextX = this.x + this.speed[0] * dT;
       const nextY = this.y + this.speed[1] * dT;
 
-      if (nextX >= 1 || nextX <= 0) {
+      if (nextX >= 0.97 || nextX <= 0) {
         this.speed[0] = -this.speed[0];
       }
 
@@ -47,7 +47,7 @@ export default {
         }
       }
 
-      if (nextY >= 1 || nextY <= 0) {
+      if (nextY >= 0.96 || nextY <= 0) {
         this.speed[1] = -this.speed[1];
       }
 

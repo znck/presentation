@@ -7,11 +7,13 @@ export default {
   props: {
     from: String,
     to: String,
+    filter: {
+      default: () => /^(?:sync|control\/(?:setCurrentSlide))$/,
+    },
   },
   methods: root.methods,
   async created() {
     const channel = await this.channel();
-    const RE = /^(?:sync|control\/(?:setCurrentSlide))$/;
 
     let isSyncing = false;
 
@@ -32,8 +34,11 @@ export default {
     this.$on(
       'hook:beforeDestroy',
       store.subscribeAction(action => {
-        if (RE.test(action.type)) {
+        if (this.filter.test(action.type)) {
           if (!isSyncing) channel.sendMessage(this.to, create.vuexAction(action));
+          else console.log('Already syncing', action)
+        } else {
+          console.log('Ignore', action)
         }
       })
     );

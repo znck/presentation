@@ -17,6 +17,7 @@ export default {
       isExpanded: false,
       secret: null,
       isSharingStream: false,
+      filter: /^(?:sync|control\/setCurrentSlide|questions\/_addResponse|users\/_addUser)$/
     };
   },
   computed: {
@@ -84,7 +85,7 @@ export default {
   <div v-if="isExpanded" :class="[$.container, $.expanded]">
     <!-- TODO: Use click away -->
     <template v-if="slideshowId">
-      <SyncVuex :to="slideshowId" key="sync" />
+      <SyncVuex :to="slideshowId" key="sync" :filter="filter" />
       {{ slideshowId }}
       <button @click="setActiveSlideshow(null)">disconnect</button>
       <button @click="shareScreen" v-if="!isSharingStream">share screen</button>
@@ -93,7 +94,7 @@ export default {
 
     <ul v-else>
       <QRCode :content="slideshowURL" size="30vw" />
-      <pre>{{ slideshowURL }}</pre>
+      <a :href="slideshowURL" target="_blank">Open in new Tab</a>
 
       <li v-for="slideshow in slideshows" :key="slideshow">
         {{ slideshow.substr(slideshow.length - 4 ) }}
@@ -108,7 +109,7 @@ export default {
   </div>
   <div v-else :class="$.container">
     <template v-if="slideshowId">
-      <SyncVuex :to="slideshowId" key="sync" />
+      <SyncVuex :to="slideshowId" key="sync" :filter="filter" />
       <button @click="isExpanded = true" :class="$.button" data-icon>
         <img src="@/assets/slideshow.svg" />
       </button>

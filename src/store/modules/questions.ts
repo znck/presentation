@@ -22,15 +22,19 @@ const MODULE: Module<State, RootState> = {
   }),
   getters: {},
   actions: {
-    setup({ commit }, _channel: Channel) {
+    setup({ dispatch }, _channel: Channel) {
       if (_channel.me.role !== 'admin') return;
       channel = _channel;
 
       channel.onMessage((user, message) => {
         if (is.questionResponse(message)) {
-          commit('ADD_RESPONSE', { ...message.payload, user });
+          dispatch('_addResponse', { ...message.payload, user });
         }
       });
+    },
+
+    _addResponse({ commit }, payload) {
+      commit('ADD_RESPONSE', payload);
     },
 
     async postQuestion({ commit, state }, payload: BaseQuestion) {
@@ -65,6 +69,13 @@ const MODULE: Module<State, RootState> = {
         if (question.answers.findIndex(answer => answer.user.email === userId) < 0) {
           question.answers.push(answer);
         }
+      } else {
+        state.questions.push({
+          id: id,
+          answers: [answer],
+          options: [],
+          text: '',
+        });
       }
     },
   },

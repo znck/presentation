@@ -19,19 +19,29 @@ const MODULE: Module<State, RootState> = {
     onlineUsers: state => state.users.filter(user => user.status === 'online').filter(user => user.role === 'audience'),
   },
   actions: {
-    setup({ commit }, _channel: Channel) {
+    setup({ dispatch }, _channel: Channel) {
       channel = _channel;
 
-      channel.onPeerJoin(user => commit(ADD_USER, { ...user, status: 'online' }));
-      channel.onPeerLeave(user => commit(ADD_USER, { ...user, status: 'offline' }));
+      channel.onPeerJoin(user => dispatch('_addUser', { ...user, status: 'online' }));
+      channel.onPeerLeave(user => dispatch('_addUser', { ...user, status: 'offline' }));
+    },
+    _addUser({ commit }, user) {
+      commit(ADD_USER, user);
     },
   },
   mutations: {
     [ADD_USER](state, user: Person) {
       const index = state.users.findIndex(call => call.email === user.email);
 
-      if (index >= 0) state.users.splice(index, 1, user);
-      else state.users.unshift(user);
+      if (index >= 0) {
+        const current = state.users[index];
+
+        if (user.status === 'online' || current.id === user.id) {
+          state.users.splice(index, 1);
+        }
+      }
+
+      state.users.unshift(user);
     },
   },
 };

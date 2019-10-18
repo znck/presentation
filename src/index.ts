@@ -7,7 +7,7 @@ import FencedCode from '@/components/FencedCode.vue';
 import SlidesContainer from '@/store/components/SlidesContainer.vue';
 import Question from '@/store/components/Question.vue';
 
-import 'prismjs/themes/prism-solarizedlight.css'
+import 'prismjs/themes/prism-solarizedlight.css';
 import './style.css';
 
 export async function createApp(Presentation: any) {
@@ -15,6 +15,12 @@ export async function createApp(Presentation: any) {
   Vue.config.keyCodes.minus = 45;
   Vue.config.devtools = true;
   Vue.component('VS', SlidesContainer);
+  Vue.component('OutboundLink', {
+    functional: true,
+    render(h, { data, children }) {
+      return h('a', { ...data, attrs: { target: '_blank', ...data.attrs } }, children);
+    },
+  });
   Vue.component('VueSlides', SlidesContainer);
   Vue.component('Presentation', Presentation);
   Vue.component('QRCode', QRCode);
