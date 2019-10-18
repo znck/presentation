@@ -10,7 +10,6 @@ function getFromLocalStorage() {
 
   return {
     name: '',
-    email: '',
     ...(value ? JSON.parse(value) : null),
   };
 }
@@ -47,7 +46,7 @@ export default {
     async connect() {
       this.status = 'connecting';
       channel.setName(this.name);
-      channel.setEmail(this.email);
+      channel.setEmail(this.name + '@example.com');
 
       setFromLocalStorage({ name: this.name, email: this.email });
 
@@ -95,23 +94,12 @@ export default {
   <div :class="$.container">
     <form v-if="status !== 'connected'" @submit.prevent="connect">
       <label>
-        Name
+        Github Username
         <input
           type="text"
           name="name"
           required
           v-model="name"
-          :disabled="status === 'connecting'"
-        />
-      </label>
-
-      <label>
-        Email
-        <input
-          type="email"
-          name="email"
-          required
-          v-model="email"
           :disabled="status === 'connecting'"
         />
       </label>

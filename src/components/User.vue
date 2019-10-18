@@ -234,10 +234,12 @@ export default {
   },
   computed: {
     photo() {
-      const email = this.email;
-      const hash = MD5(email.toLowerCase());
+      const name = (this.name || '').trim();
+      // const email = this.email;
+      // const hash = MD5(email.toLowerCase());
 
-      return `//www.gravatar.com/avatar/${hash}?s=54`;
+      // return `//www.gravatar.com/avatar/${hash}?s=54`;
+      return `//github.com/${name}.png`;
     },
   },
 };
